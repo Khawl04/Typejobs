@@ -1,0 +1,539 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1a2332;
+    min-height: 100vh;
+    color: white;
+}
+
+/* Header */
+.header {
+    background: #4CAF50;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Logo Section */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 35px;
+    height: 35px;
+    background: white;
+    color: #4CAF50;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.logo-text {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Navigation */
+.nav-section {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-btn {
+    background: white;
+    color: #4CAF50;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.nav-btn:hover {
+    background: #f0f0f0;
+}
+
+/* Auth Section */
+.auth-section {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.auth-btn {
+    color: white;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.auth-btn.register {
+    background: white;
+    color: #4CAF50;
+}
+
+.auth-btn:hover {
+    opacity: 0.9;
+}
+
+/* Main Content */
+.main-content {
+    padding: 30px 20px;
+}
+
+.service-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Gallery Section */
+.gallery-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-image {
+    position: relative;
+    width: 100%;
+    height: 400px;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #d0d0d0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #666;
+}
+
+.main-placeholder {
+    height: 400px;
+}
+
+.image-content {
+    text-align: center;
+}
+
+.image-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.image-content p {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Navigation Buttons */
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.nav-button:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.nav-button.prev {
+    left: 10px;
+}
+
+.nav-button.next {
+    right: 10px;
+}
+
+/* Thumbnails */
+.thumbnails {
+    display: flex;
+    gap: 10px;
+}
+
+.thumbnail-item {
+    width: 100px;
+    height: 80px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.thumbnail-item.active {
+    border-color: #4CAF50;
+}
+
+.thumbnail-item:hover {
+    border-color: #66BB6A;
+}
+
+.thumbnail-item .image-placeholder {
+    height: 100%;
+    border-radius: 4px;
+}
+
+.thumbnail-item .image-placeholder span {
+    font-size: 24px;
+}
+
+/* Service Description */
+.service-description {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.service-description h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.service-description p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+
+/* Service Info Section */
+.service-info-section {
+    position: sticky;
+    top: 100px;
+}
+
+.service-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    color: #333;
+}
+
+/* Purchase Header */
+.purchase-header {
+    margin-bottom: 25px;
+}
+
+.buy-button {
+    width: 100%;
+    background: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.buy-button:hover {
+    background: #45a049;
+}
+
+/* Provider Profile */
+.provider-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.provider-avatar {
+    width: 60px;
+    height: 60px;
+    background: #e0e0e0;
+    color: #666;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.provider-info {
+    flex: 1;
+}
+
+.provider-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.provider-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stars {
+    display: flex;
+    gap: 2px;
+}
+
+.star {
+    font-size: 16px;
+    color: #ddd;
+}
+
+.star.filled {
+    color: #FFD700;
+}
+
+.rating-text {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Service Details */
+.service-details {
+    margin-bottom: 25px;
+}
+
+.detail-item {
+    margin-bottom: 20px;
+}
+
+.detail-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.detail-value {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Contact Section */
+.contact-section {
+    text-align: center;
+}
+
+.contact-button {
+    background: transparent;
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.contact-button:hover {
+    background: #4CAF50;
+    color: white;
+}
+
+/* Reviews Section */
+.reviews-section {
+    max-width: 1400px;
+    margin: 40px auto 0;
+    padding: 0 20px;
+}
+
+.reviews-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.reviews-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.review-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.reviewer-avatar {
+    width: 40px;
+    height: 40px;
+    background: #e0e0e0;
+    color: #666;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.reviewer-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.review-rating .stars {
+    gap: 1px;
+}
+
+.review-rating .star {
+    font-size: 14px;
+}
+
+.review-date {
+    font-size: 12px;
+    color: #ccc;
+}
+
+.review-content p {
+    font-size: 14px;
+    color: #e0e0e0;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 15px;
+    }
+
+    .nav-section {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .auth-section {
+        order: 2;
+    }
+
+    .logo-section {
+        order: 1;
+    }
+
+    .main-content {
+        padding: 20px 15px;
+    }
+
+    .service-container {
+        gap: 20px;
+    }
+
+    .main-image {
+        height: 250px;
+    }
+
+    .main-placeholder {
+        height: 250px;
+    }
+
+    .thumbnails {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .thumbnail-item {
+        width: 80px;
+        height: 64px;
+    }
+
+    .service-card {
+        padding: 20px;
+    }
+
+    .provider-profile {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .reviews-container {
+        padding: 20px;
+    }
+}

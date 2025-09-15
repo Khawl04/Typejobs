@@ -1,0 +1,277 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1a2332;
+    min-height: 100vh;
+    color: white;
+}
+
+/* Header */
+.header {
+    background: #4CAF50;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+}
+
+.nav-section {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-section a {
+    background: white;
+    color: #4CAF50;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.nav-section a:hover {
+    background: #f0f0f0;
+}
+
+.auth-section {
+    display: flex;
+    gap: 15px;
+}
+
+.auth-section a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.auth-section a.register {
+    background: white;
+    color: #4CAF50;
+}
+
+.auth-section a:hover {
+    opacity: 0.9;
+}
+
+/* Main Content */
+.main-content {
+    padding: 30px 20px;
+    min-height: calc(100vh - 80px);
+}
+
+.checkout-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Purchase Section */
+.purchase-section {
+    color: white;
+}
+
+.purchase-section h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.message {
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+legend {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+input, select {
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+input:focus, select:focus {
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+}
+
+input::placeholder {
+    color: #999;
+}
+
+/* Order Section */
+.order-section {
+    position: sticky;
+    top: 100px;
+}
+
+.order-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    color: #333;
+}
+
+.order-card h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.product-section {
+    margin-bottom: 20px;
+}
+
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 5px;
+}
+
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.product-info h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.product-info p {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.product-info small {
+    font-size: 12px;
+    color: #888;
+}
+
+.product-price {
+    font-weight: 600;
+}
+
+/* Divider */
+.divider {
+    border: none;
+    border-top: 2px solid #e0e0e0;
+    margin: 20px 0;
+}
+
+/* Total Section */
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Payment Button */
+button[type="submit"] {
+    width: 100%;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background: #45a049;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-section {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}

@@ -1,0 +1,220 @@
+/* styleorden_basic.css - Estilos simplificados para checkout/orden */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1a2332;
+    color: white;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    background: #4CAF50;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo-section {
+    display: flex;        
+    align-items: center;    
+    gap: 10px;              
+}
+
+
+.logo-icon {
+    width: 35px;
+    height: 35px;
+    background: white;
+    color: #4CAF50;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+
+.nav-section, .auth-section {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-section a, .auth-section a {
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.nav-section a {
+    background: white;
+    color: #4CAF50;
+}
+
+.nav-section a:hover {
+    background: #f0f0f0;
+}
+
+.auth-section a {
+    color: white;
+}
+
+.auth-section a.register {
+    background: white;
+    color: #4CAF50;
+}
+
+.auth-section a:hover {
+    opacity: 0.9;
+}
+
+/* Main content */
+main.main-content {
+    padding: 30px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Orden/Checkout container */
+.order-container, .checkout-container {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 30px;
+}
+
+/* Orden Card */
+.order-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    color: #333;
+}
+
+.order-card h1, .order-card h2, .order-card h3 {
+    margin-bottom: 15px;
+}
+
+.order-card p {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+/* Detalles de la orden */
+.detail-list div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.detail-list dt {
+    font-weight: 600;
+}
+
+.detail-list dd {
+    margin: 0;
+}
+
+/* Servicio */
+.service-section h4 {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+/* Total */
+.total-section {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+/* Acciones */
+.order-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.order-actions a {
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+}
+
+.order-actions a.primary {
+    background: #4CAF50;
+    color: white;
+}
+
+.order-actions a.secondary {
+    background: #e0e0e0;
+    color: #333;
+}
+
+/* Mensaje adicional */
+.additional-info p {
+    margin-bottom: 8px;
+}
+
+/* Footer */
+footer.page-footer {
+    background: #222;
+    color: #ccc;
+    padding: 20px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+footer.page-footer a {
+    color: #ccc;
+    margin: 0 8px;
+    text-decoration: none;
+}
+
+footer.page-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav-section, .auth-section {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
