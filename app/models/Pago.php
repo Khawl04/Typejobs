@@ -50,9 +50,12 @@ class Pago extends Model {
         $result = $this->query($sql, [$idReserva]);
         return !empty($result);
     }
-    public function eliminarPorReserva($id_reserva) {
-    $sql = "DELETE FROM pago WHERE id_reserva = ?";
-    $this->query($sql, [$id_reserva]);
+public function eliminarPorReserva($idReserva) {
+    $query = "DELETE FROM pago WHERE id_reserva = ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('i', $idReserva);
+    $stmt->execute();
+    $stmt->close();
 }
 
 }

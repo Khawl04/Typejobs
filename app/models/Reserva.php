@@ -122,8 +122,8 @@ class Reserva extends Model {
         return $res[0]['total'] ?? 0;
     }
     public function delete($idReserva) {
-    // Elimina pagos asociados desde aquí
-    $pagoModel = new Pago($this->db); // Pasa el db handler si lo necesitas
+    // Elimina todos los pagos de la reserva
+    $pagoModel = new Pago($this->db); // pasa la conexión si lo requiere tu modelo
     $pagoModel->eliminarPorReserva($idReserva);
 
     // Ahora elimina la reserva
@@ -133,6 +133,7 @@ class Reserva extends Model {
     $stmt->execute();
     $stmt->close();
 }
+
 
 
     

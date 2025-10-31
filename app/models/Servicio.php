@@ -79,15 +79,12 @@ class Servicio extends Model {
 
     // Obtener servicios de un proveedor (array)
     public function obtenerPorProveedor($idProveedor) {
-        $sql = "SELECT s.*, 
-                      c.nombre_categoria as categoria,
-                      (SELECT imagen FROM imagen_servicio im WHERE im.id_servicio = s.id_servicio AND im.principal = 1 LIMIT 1) as imagen_principal
-                FROM {$this->table} s
-                LEFT JOIN categoria c ON s.id_categoria = c.id_categoria
-                WHERE s.id_proveedor = ?
-                ORDER BY s.id_servicio DESC";
-        return $this->query($sql, [$idProveedor]);
-    }
+    $sql = "SELECT s.*, s.imagen_servicio as imagen_principal
+            FROM servicio s
+            WHERE s.id_proveedor = ?";
+    return $this->query($sql, [$idProveedor]);
+}
+
 
     // Contar servicios de un proveedor
     public function totalPorProveedor($idProveedor) {
@@ -129,14 +126,16 @@ public function obtenerPorId($idServicio) {
     return [];
 }
 public function obtenerResenas($idServicio) {
-    $sql = "SELECT r.*, u.nombre as nombre_cliente
+    $sql = "SELECT r.*, u.nombre AS nombre_cliente, u.apellido AS apellido_cliente, u.foto_perfil
             FROM resena r
             INNER JOIN usuario u ON r.id_cliente = u.id_usuario
             WHERE r.id_servicio = ?
             ORDER BY r.fecha DESC";
-    $result = $this->query($sql, [$idServicio]);
-    return $result;
+    return $this->query($sql, [$idServicio]);
 }
+
+
+
 public function usuarioCompro($idUsuario, $idServicio) {
     $sql = "SELECT 1
             FROM pago p
@@ -145,6 +144,70 @@ public function usuarioCompro($idUsuario, $idServicio) {
     $result = $this->query($sql, [$idUsuario, $idServicio]);
     return !empty($result);
 }
+public function obtenerConFiltros($busqueda = '', $orden = 'relevancia') {
+    $sql = "SELECT s.*, 
+                c.nombre_categoria as categoria, 
+                (SELECT imagen FROM imagen_servicio im WHERE im.id_servicio = s.id_servicio AND im.principal = 1 LIMIT 1) as imagen_principal,
+                (SELECT AVG(r.calificacion) FROM resena r WHERE r.id_servicio = s.id_servicio) as calificacion
+            FROM {$this->table} s
+            LEFT JOIN categoria c ON s.id_categoria = c.id_categoria
+            WHERE s.estado = 'disponible'";
+    $params = [];
+
+    if ($busqueda !== '') {
+        $sql .= " AND (s.titulo LIKE ? OR s.descripcion LIKE ? OR c.nombre_categoria LIKE ?)";
+        $like = "%$busqueda%";
+        $params = [$like, $like, $like];
+    }
+
+    // Ordenamientos
+    switch ($orden) {
+        case 'precio_asc':
+            $sql .= " ORDER BY s.precio ASC";
+            break;
+        case 'precio_desc':
+            $sql .= " ORDER BY s.precio DESC";
+            break;
+        case 'estrellas_desc':
+            $sql .= " ORDER BY calificacion DESC";
+            break;
+        default:
+            $sql .= " ORDER BY s.id_servicio DESC";
+            break;
+    }
+
+    return $this->query($sql, $params);
+}
+// Guarda una nueva reseña
+public function guardarResena($idServicio, $idUsuario, $calificacion, $texto) {
+    $sql = "INSERT INTO resena (id_servicio, id_cliente, calificacion, texto, fecha)
+            VALUES (?, ?, ?, ?, NOW())";
+    $this->exec($sql, [$idServicio, $idUsuario, $calificacion, $texto]);
+}
+
+// Suma/quita el like de la reseña (toggle por usuario)
+public function toggleLikeResena($idResena) {
+    error_log("ID para dar like: $idResena");
+    // Simplemente suma uno al campo 'likes' de la tabla resena
+    $this->exec("UPDATE resena SET likes = likes + 1 WHERE id_resena = ?", [$idResena]);
+}
+
+
+
+// Devuelve el id_servicio de una reseña
+public function getServicioIdByResena($idResena) {
+    $sql = "SELECT id_servicio FROM resena WHERE id_resena = ?";
+    $resultado = $this->query($sql, [$idResena]);
+    return $resultado[0]['id_servicio'] ?? null;
+}
+public function updateLikeCount($idResena, $delta) {
+    if ($delta > 0) {
+        $this->exec("UPDATE resena SET likes = likes + 1 WHERE id_resena = ?", [$idResena]);
+    } else {
+        $this->exec("UPDATE resena SET likes = GREATEST(likes - 1, 0) WHERE id_resena = ?", [$idResena]);
+    }
+}
+
 
 
 

@@ -76,9 +76,6 @@ class AuthController extends Controller {
                 $_SESSION['tipo_usuario'] = $user['tipo_usuario'];
                 $_SESSION['foto_perfil'] = $user['foto_perfil'];
                 $_SESSION['success'] = "Bienvenido, {$user['nombre']} {$user['apellido']}";
-                
-                error_log('REAL LOGIN SESSION: ' . print_r($_SESSION, true));
-
 
                 session_write_close();
 
@@ -121,6 +118,8 @@ class AuthController extends Controller {
     
     // RF-02: Registrar cliente con validaciones mejoradas
     public function registerCliente() {
+        session_unset(); // <-- aquí al principio para limpiar variables de sesión antiguas
+
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $this->redirect('/register');
         }
@@ -188,6 +187,8 @@ class AuthController extends Controller {
     
     // RF-05: Registrar proveedor con validaciones mejoradas
     public function registerProveedor() {
+        session_unset(); // <-- aquí al principio para limpiar variables de sesión antiguas
+        
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $this->redirect('/register/proveedor');
         }

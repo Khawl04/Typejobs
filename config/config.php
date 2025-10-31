@@ -38,7 +38,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // ==============================
 define('UPLOAD_PATH', ROOT_PATH . '/public/uploads/');
 define('MAX_FILE_SIZE', 5 * 1024 * 1024);
-define('ALLOWED_EXTENSIONS', ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'doc', 'docx']);
+define('ALLOWED_EXTENSIONS', ['jpg', 'jpeg', 'png', 'gif','pdf', 'doc', 'docx','odt','txt','rar','zip']);
 
 // ==============================
 // Paginación

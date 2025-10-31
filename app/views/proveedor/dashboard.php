@@ -263,7 +263,7 @@ $hayMedia = ($calificacion - $estrellasLlenas) >= 0.25; // muestra media si >0.2
             <a href="<?= BASE_URL ?>/proveedor/servicios" class="btn btn-success">+ Crear Servicio</a>
             <a href="<?= BASE_URL ?>/servicio" class="btn">Ver Servicios</a>
             <a href="<?= BASE_URL ?>/proveedor/reservas" class="btn">Reservas</a>
-            <a href="<?= BASE_URL ?>/mensaje/mensaje" class="btn btn-mensajes">Mensajes</a>
+            <a href="<?= BASE_URL ?>/mensaje" class="btn btn-mensajes">Mensajes</a>
             <a href="<?= BASE_URL ?>/proveedor/perfil" class="btn btn-perfil">Perfil</a>
         </div>
 

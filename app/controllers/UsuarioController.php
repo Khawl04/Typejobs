@@ -18,55 +18,45 @@ class UsuarioController extends Controller {
 
     // Procesa el registro de usuario, creando cliente/proveedor según opción
     public function registrar() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = [
-                'email'                => $_POST['email'] ?? '',
-                'nombre'               => $_POST['nombre'] ?? '',
-                'apellido'             => $_POST['apellido'] ?? '',
-                'nomusuario'           => $_POST['nomusuario'] ?? '',
-                'telefono'             => $_POST['telefono'] ?? '',
-                'contrasena'           => $_POST['contrasena'] ?? '',
-                'confirmarcontrasena'  => $_POST['confirmarcontrasena'] ?? '',
-                'tipo_usuario'         => $_POST['tipo_usuario'] ?? 'cliente',
-                'foto_perfil'          => $_POST['foto_perfil'] ?? ''
-            ];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        session_unset(); // Limpia cualquier variable previa
 
-            try {
-                // 1. Crear usuario principal
-                $id_usuario = $this->usuarioModel->registrar($data);
+        $data = [
+            'email'                => $_POST['email'] ?? '',
+            'nombre'               => $_POST['nombre'] ?? '',
+            'apellido'             => $_POST['apellido'] ?? '',
+            'nomusuario'           => $_POST['nomusuario'] ?? '',
+            'telefono'             => $_POST['telefono'] ?? '',
+            'contrasena'           => $_POST['contrasena'] ?? '',
+            'confirmarcontrasena'  => $_POST['confirmarcontrasena'] ?? '',
+            'tipo_usuario'         => $_POST['tipo_usuario'] ?? 'cliente',
+            'foto_perfil'          => $_POST['foto_perfil'] ?? ''
+        ];
 
-                // 2. Crear registro en cliente o proveedor según tipo_usuario
-                if ($id_usuario && strtolower($data['tipo_usuario']) === 'cliente') {
-                    $this->clienteModel->create(['id_usuario' => $id_usuario]);
-                }
-                if ($id_usuario && strtolower($data['tipo_usuario']) === 'proveedor') {
-                    $this->proveedorModel->create(['id_usuario' => $id_usuario]);
-                }
+        try {
+            // 1. Crear usuario principal
+            $id_usuario = $this->usuarioModel->registrar($data);
 
-                // 3. Setear sesión y redirigir al dashboard correspondiente
-                $_SESSION['user_id'] = $id_usuario;
-                $_SESSION['tipo_usuario'] = strtolower($data['tipo_usuario']);
-                $_SESSION['nombre'] = $data['nombre'];
-                $_SESSION['apellido'] = $data['apellido'];
-                $_SESSION['email'] = $data['email'];
-                $_SESSION['foto_perfil'] = $data['foto_perfil'];
-                $_SESSION['telefono'] = $data['telefono'];
-
-                if (strtolower($data['tipo_usuario']) === 'proveedor') {
-                    header('Location: /proveedor/dashboard');
-                    exit;
-                } else {
-                    header('Location: /cliente/dashboard');
-                    exit;
-                }
-
-            } catch (Exception $e) {
-                $this->view('auth/register', ['mensaje_error' => $e->getMessage()]);
+            // 2. Crear registro en cliente o proveedor según tipo_usuario
+            if ($id_usuario && strtolower($data['tipo_usuario']) === 'cliente') {
+                $this->clienteModel->create(['id_usuario' => $id_usuario]);
             }
-        } else {
-            $this->view('usuario/registro');
+            if ($id_usuario && strtolower($data['tipo_usuario']) === 'proveedor') {
+                $this->proveedorModel->create(['id_usuario' => $id_usuario]);
+            }
+
+            // 3. SOLO mensaje de éxito, NO setear sesión de usuario
+            $_SESSION['success'] = "Registro exitoso. Por favor, inicie sesión.";
+            header('Location: ' . BASE_URL . '/login');
+            exit;
+
+        } catch (Exception $e) {
+            $this->view('auth/register', ['mensaje_error' => $e->getMessage()]);
         }
+    } else {
+        $this->view('usuario/registro');
     }
+}
 
     // Login idéntico a tu lógica actual
     public function login($email, $contrasena) {

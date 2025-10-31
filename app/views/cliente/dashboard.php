@@ -59,12 +59,6 @@
     border: 1.2px solid #1e5fc5;
 }
 
-.dashboard-menu .btn-service {
-    background: #e9eefb;
-    color: #002df8ff;
-    border: 1.2px solid #d1ae10ff;
-}
-
 .dashboard-menu a:hover {
     background: #228869;
     color: #fff;
@@ -134,8 +128,7 @@
         <a class="btn btn-primary" href="<?= BASE_URL ?>/cliente/perfil">Mi Perfil</a>
         <a class="btn btn-secondary" href="<?= BASE_URL ?>/cliente/reservas">Mis Reservas</a>
         <a class="btn btn-success" href="<?= BASE_URL ?>/cliente/pagos">Historial de Pagos</a>
-        <a class="btn btn-msg" href="<?= BASE_URL ?>/cliente/mensajes">Ver Mensajes</a>
-        <a class="btn btn-service" href="<?= BASE_URL ?>/servicio">Ver Servicios</a>
+        <a class="btn btn-msg" href="<?= BASE_URL ?>/mensaje">Ver Mensajes</a>
     </div>
 
     <div class="dashboard-info">

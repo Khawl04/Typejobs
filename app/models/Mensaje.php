@@ -41,13 +41,17 @@ class Mensaje extends Model
 
     // Enviar un mensaje
     public function enviar($idRemitente, $idDestinatario, $contenido, $archivoAdjunto = null) {
-        return $this->create([
-            'id_usuario' => $idRemitente,
-            'id_usuario_dest' => $idDestinatario,
-            'contenido' => $contenido,
-            'archivo_adjunto' => $archivoAdjunto,
-            'leido' => 0
-        ]);
-    }
+    // Solo incluye los campos que existen de verdad en la base
+    return $this->create([
+        'id_usuario' => $idRemitente,
+        'id_usuario_dest' => $idDestinatario,
+        'contenido' => $contenido, // Si tu tabla es mensaje, cambia aquí a 'mensaje'
+        'archivo_adjunto' => $archivoAdjunto,
+        'leido' => 0,
+        // 'fecha_envio' => date('Y-m-d H:i:s'), // Si no tienes por default en la BD
+        // 'archivo_adjunto' => $archivoAdjunto // Solo si realmente existe este campo
+    ]);
+}
+
 }
 ?>

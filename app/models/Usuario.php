@@ -87,7 +87,6 @@ class Usuario {
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
-    error_log(print_r($row,1));
 
 
     if ($row && password_verify($contrasena, $row['contrasena'])) {

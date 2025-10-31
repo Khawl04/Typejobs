@@ -123,5 +123,20 @@ class Proveedor extends Model {
                 LIMIT ?";
         return $this->query($sql, ["%$ubicacion%", $limit]);
     }
+   public function obtenerPorId($idUsuario) {
+    $sql = "SELECT p.*, u.nombre, u.apellido, u.foto_perfil,
+                (SELECT AVG(r.calificacion) 
+                 FROM resena r 
+                 WHERE r.id_servicio IN 
+                     (SELECT id_servicio FROM servicio WHERE id_proveedor = p.id_usuario)
+                ) as calificacion_promedio
+            FROM proveedor p
+            INNER JOIN usuario u ON p.id_usuario = u.id_usuario
+            WHERE p.id_usuario = ?";
+    $res = $this->query($sql, [$idUsuario]);
+    return $res[0] ?? null;
+}
+
+
 }
 ?>

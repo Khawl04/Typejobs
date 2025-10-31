@@ -10,16 +10,23 @@ class ServicioController extends Controller {
     }
 
     // Ruta GET /servicio - Catálogo público de servicios (muestra todo y el form de alta)
-    public function index() {
-        $categoriaModel = $this->model('Categoria');
-        $servicios = $this->servicioModel->obtenerTodos();
-        $categorias = $categoriaModel->obtenerActivas();
+   public function index() {
+    $categoriaModel = $this->model('Categoria');
+    // Nuevo: recoger filtros desde GET
+    $busqueda = $_GET['busqueda'] ?? '';
+    $orden = $_GET['orden'] ?? 'relevancia';
 
-        $this->view('servicio/servicio', [
-            'servicios' => $servicios,
-            'categorias' => $categorias
-        ]);
-    }
+    // Usa el modelo para filtrar/ordenar según lo recibido
+    $servicios = $this->servicioModel->obtenerConFiltros($busqueda, $orden);
+
+    $categorias = $categoriaModel->obtenerActivas();
+
+    $this->view('servicio/servicio', [
+        'servicios' => $servicios,
+        'categorias' => $categorias,
+        'orden' => $orden // para el select
+    ]);
+}
 
     // POST /servicio - Publicar nuevo servicio
     public function guardar() {
@@ -116,24 +123,34 @@ class ServicioController extends Controller {
         ];
         $this->view('servicio/detalle', $data);
     }
- public function detalle() {
-    $idServicio = $_GET['id'] ?? null;
-    if (!$idServicio) {
-        die('ID de servicio no especificado');
+public function detalle() {
+    // Tomar el id por GET o por POST (para reseñas nuevas)
+    $idServicio = $_GET['id'] ?? $_POST['id_servicio'] ?? null;
+    if (!$idServicio) die('ID de servicio no especificado');
+
+    // GUARDAR RESEÑA al recibir POST con calificacion y texto
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['calificacion'], $_POST['texto'])) {
+        $idUsuario = $_SESSION['id_usuario'] ?? null;
+        $calificacion = (int)$_POST['calificacion'];
+        $texto = trim($_POST['texto']);
+        if ($idUsuario && $calificacion >= 1 && $calificacion <= 5 && $texto !== '') {
+            $this->servicioModel->guardarResena($idServicio, $idUsuario, $calificacion, $texto);
+        }
+        // Redirige tipo PRG para evitar doble submit
+        header("Location: ".BASE_URL."/servicio/detalle?id=".$idServicio);
+        exit;
     }
+
     $servicio = $this->servicioModel->obtenerPorId($idServicio);
     $imagenes = $this->servicioModel->obtenerImagenes($idServicio) ?? [];
     $proveedor = $this->proveedorModel->obtenerConUsuario($servicio['id_proveedor']);
     $resenas = $this->servicioModel->obtenerResenas($idServicio) ?? [];
 
-    // Aquí agregas la lógica para el permiso de reseñar:
     $puedeReseniar = false;
     if (isset($_SESSION['id_usuario'])) {
         $idUsuario = $_SESSION['id_usuario'];
-        // Lógica: chequear si compró el servicio
         $puedeReseniar = $this->servicioModel->usuarioCompro($idUsuario, $idServicio);
     }
-
     $this->view('servicio/detalle', [
         'servicio' => $servicio,
         'imagenes' => $imagenes,
@@ -141,6 +158,33 @@ class ServicioController extends Controller {
         'resenas' => $resenas,
         'puedeReseniar' => $puedeReseniar
     ]);
+}
+public function likeResena() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_resena'])) {
+        $idResena = (int)$_POST['id_resena'];
+
+        // Leer cookie actual
+        $cookieName = "likes_resena";
+        $userLikes = isset($_COOKIE[$cookieName]) ? json_decode($_COOKIE[$cookieName], true) : [];
+
+        // Toggle: si ya está, saca el like, si no, suma el like
+        if (isset($userLikes[$idResena])) {
+            // QUITAR like (restar contador)
+            unset($userLikes[$idResena]);
+            $this->servicioModel->updateLikeCount($idResena, -1);
+        } else {
+            // DAR like (sumar contador)
+            $userLikes[$idResena] = 1;
+            $this->servicioModel->updateLikeCount($idResena, 1);
+        }
+        // Actualizar la cookie, 30 días
+        setcookie($cookieName, json_encode($userLikes), time() + (60 * 60 * 24 * 30), "/");
+
+        // Redirige de vuelta al detalle:
+        $idServicio = $this->servicioModel->getServicioIdByResena($idResena);
+        header("Location: ".BASE_URL."/servicio/detalle?id=".$idServicio);
+        exit;
+    }
 }
 
 

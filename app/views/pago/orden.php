@@ -116,8 +116,26 @@
             <strong>Proveedor:</strong>
             <?= htmlspecialchars($reserva['proveedor_nombre'] . ' ' . $reserva['proveedor_apellido']) ?><br>
             <strong>Fecha:</strong>
-            <?= date('d/m/Y H:i', strtotime($reserva['fecha_reserva'].' '.$reserva['hora_inicio'])) ?>
+            <?php
+$fecha = isset($reserva['fecha_reserva']) ? $reserva['fecha_reserva'] : '';
+$hora = isset($reserva['hora_inicio']) ? $reserva['hora_inicio'] : '';
+
+if ($fecha && $hora) {
+    // Reemplaza la hora en fecha_reserva por hora_inicio
+    $datePart = date('Y-m-d', strtotime($fecha));
+    $datetime = $datePart . ' ' . $hora;
+
+    if (strtotime($datetime) !== false) {
+        echo date('d/m/Y H:i', strtotime($datetime));
+    } else {
+        echo 'Fecha/Hora inválida';
+    }
+} else {
+    echo 'Fecha/Hora inválida';
+}
+?>
         </div>
+
 
         <div class="orden-seccion">
             <strong>Servicio:</strong><br>

@@ -124,7 +124,7 @@
         <!-- Campos de tarjeta, ocultos por defecto -->
         <div id="tarjeta-fields" style="display:none; margin-top:16px;">
             <label>Número de tarjeta *</label>
-            <input type="text" name="numero_tarjeta" maxlength="19" pattern="\d{13,19}" placeholder="1234 5678 9012 3456">
+           <input type="text" name="numero_tarjeta" maxlength="19" pattern="(\d{4} ?){3,5}" placeholder="1234 5678 9012 3456">
 
             <label>Nombre del titular *</label>
             <input type="text" name="titular_tarjeta" maxlength="64" placeholder="Como aparece en la tarjeta">

@@ -18,6 +18,14 @@ $router->get('/admin', function() {
     require_once __DIR__ . '/../app/views/admin/index.php';
 });
 
+// Ruta soporte
+$router->get('/soporte', function() {
+    require_once __DIR__ . '/../app/views/soporte/index.php';
+});
+
+//Ruta perfil
+$router->get('/perfil', 'PerfilController@index');
+
 // Ruta cliente
 $router->get('/cliente', 'ClienteController@dashboard');
 $router->get('/cliente/perfil', 'ClienteController@perfil');
@@ -39,6 +47,9 @@ $router->get('/proveedor/reservas', 'ProveedorController@reservas');
 $router->get('/servicio', 'ServicioController@index'); 
 $router->post('/servicio', 'ServicioController@guardar');
 $router->get('/servicio/detalle', 'ServicioController@detalle');
+$router->post('/servicio/detalle', 'ServicioController@detalle'); // POST para guardar reseña
+$router->post('/servicio/likeResena', 'ServicioController@likeResena'); // POST para dar like a reseña
+
 
 //Ruta reserva
 $router->get('/reserva', 'ReservaController@nuevaReserva');
@@ -46,7 +57,9 @@ $router->post('/reserva', 'ReservaController@crear');
 
 
 // Ruta mensaje
-$router->get('/mensaje/mensaje', 'MensajeController@mensaje');
+$router->get('/mensaje', 'MensajeController@mensaje');
+$router->post('/mensaje', 'MensajeController@enviar');
+
 
 // Ruta orden
 $router->get('/pago/orden', 'PagoController@orden');
@@ -56,11 +69,6 @@ $router->post('/pago/orden', 'PagoController@orden');
 // Ruta pago
 $router->get('/pago', 'PagoController@pago');
 
-
-// Ruta soporte
-$router->get('/soporte', function() {
-    require_once __DIR__ . '/../app/views/soporte/index.php';
-});
 
 // RUTAS PARA REGISTER
 $router->get('/register', function() {
@@ -79,10 +87,7 @@ $router->post('/login', function() {
     $contrasena = $_POST['contrasena'] ?? '';
 
     try {
-        $user = $usuario->login($usuarioOEmail, $contrasena);
-
-        error_log('ARRAY LOGIN: ' . print_r($user, true));
-        
+        $user = $usuario->login($usuarioOEmail, $contrasena);        
         if ($user) {
             // Puedes guardar los datos en $_SESSION e ir a la pantalla principal
             $_SESSION['id_usuario']    = $user['id_usuario'];

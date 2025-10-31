@@ -121,19 +121,14 @@ class ReservaController extends Controller {
     }
     public function eliminarReserva() {
     if (isset($_POST['eliminar_reserva'])) {
-        // Elimina todos los pagos de la reserva
-        $pagoModel = new Pago();
-        $pagoModel->eliminarPorReserva($_POST['eliminar_reserva']);
-        
-        // Ahora elimina la reserva
-        $reservaModel = new Reserva();
+        $reservaModel = new Reserva($this->db); // pasa la conexión si tu sistema lo requiere
         $reservaModel->delete($_POST['eliminar_reserva']);
-        
         $_SESSION['success'] = "Reserva eliminada.";
         header("Location: " . BASE_URL . "/cliente/reservas");
         exit;
     }
 }
+
 
 }
 ?>
