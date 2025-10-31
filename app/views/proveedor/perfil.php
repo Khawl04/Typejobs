@@ -149,6 +149,7 @@ input[type="file"] {
         <label for="nombre_usuario">Nombre de usuario</label>
         <input type="text" required name="nomusuario" id="nomusuario"
             value="<?= htmlspecialchars($proveedor['nomusuario'] ?? '') ?>">
+
         <label for="email">Email</label>
         <input type="email" name="email" id="email" value="<?= htmlspecialchars($proveedor['email'] ?? '') ?>">
 
@@ -171,7 +172,20 @@ input[type="file"] {
         <input type="password" name="nueva_contrasena" id="nueva_contrasena" autocomplete="new-password"
             placeholder="Nueva contraseña">
 
-        <button type="submit" class="btn-guardar-perfil">Guardar cambios</button>
+        <div style="display: flex; width: 100%; justify-content: space-between; align-items: center; margin-top: 22px;">
+            <button type="submit" class="btn-guardar-perfil">Guardar cambios</button>
+        </div>
+    </form>
+
+    <!-- Form de eliminar cuenta SEPARADO y en la otra punta -->
+    <form method="post" action="<?= BASE_URL ?>/proveedor/eliminarCuenta"
+          onsubmit="return confirm('¿Seguro que deseas eliminar tu cuenta de proveedor?');"
+          style="margin-top: -52px; float: right;">
+        <button type="submit" class="btn"
+            style="background:#ef4444;color:#fff;border-radius:8px;padding:13px 24px;font-weight:700;">
+            Eliminar cuenta
+        </button>
     </form>
 </div>
+
 <?php require_once __DIR__ . '/../layouts/footer.php'; ?>

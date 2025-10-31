@@ -102,16 +102,18 @@ $this->view('cliente/perfil', ['cliente' => $cliente, 'mensaje' => $mensaje]);
 
 
     // RF-03: Eliminar cuenta
-    public function eliminarCuenta() {
-        $this->clienteModel->eliminarCliente($_SESSION['id_usuario']);
-        session_unset();
-        session_destroy();
-        $this->redirect('/');
-    }
+        public function eliminarCuenta() {
+            $this->clienteModel->eliminarCliente($_SESSION['id_usuario']);
+            session_unset();
+            session_destroy();
+            $this->redirect('/');
+        }
 
     // RF-43: Cancelar reserva
     public function cancelarReserva($idReserva) {
         $this->clienteModel->cancelarReserva($idReserva);
         $this->redirect('/cliente/reservas');
     }
+    
+    
 }

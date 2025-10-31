@@ -33,6 +33,8 @@ $router->post('/cliente/perfil', 'ClienteController@perfil');
 $router->get('/cliente/reservas', 'ClienteController@reservas');
 $router->post('/cliente/reservas', 'ClienteController@reservas');
 $router->get('/cliente/pagos', 'ClienteController@pagos');
+$router->post('/cliente/eliminarCuenta', 'ClienteController@eliminarCuenta');
+
 
 
 // Ruta proveedor
@@ -42,6 +44,7 @@ $router->get('/proveedor/servicios', 'ProveedorController@servicios');
 $router->get('/proveedor/perfil', 'ProveedorController@perfil');
 $router->post('/proveedor/perfil', 'ProveedorController@perfil');
 $router->get('/proveedor/reservas', 'ProveedorController@reservas');
+$router->post('/proveedor/eliminarCuenta', 'ProveedorController@eliminarCuenta');
 
 // Ruta servicio
 $router->get('/servicio', 'ServicioController@index'); 

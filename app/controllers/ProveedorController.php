@@ -55,6 +55,12 @@ public function dashboard() {
         'serviciosPropios' => $serviciosPropios
     ]);
 }
+    public function eliminarCuenta() {
+    $this->proveedorModel->eliminarProveedor($_SESSION['id_usuario']);
+    session_unset();
+    session_destroy();
+    $this->redirect('/');
+}
 
 public function borrarServicio() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_servicio'])) {

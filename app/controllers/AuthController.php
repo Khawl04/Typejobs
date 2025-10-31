@@ -178,7 +178,7 @@ class AuthController extends Controller {
             $_SESSION['success'] = "Registro exitoso. Por favor inicie sesión";
             $this->redirect('/login');
             
-        } catch (Exception $e) {
+        } catch (Exception $e) {    
             $_SESSION['error'] = $e->getMessage();
             $_SESSION['old'] = $data;
             $this->redirect('/register');

@@ -47,21 +47,26 @@ class Proveedor extends Model {
 
     // Eliminar proveedor (cascada manual)
     public function eliminarProveedor($idUsuario) {
-        try {
-            $this->db->beginTransaction();
+    $proveedor = $this->findBy('id_usuario', $idUsuario);
 
-            $proveedor = $this->find($idUsuario);
-            if (!$proveedor) throw new Exception("Proveedor no encontrado");
+    if ($proveedor) {
+        $idProveedor = $proveedor['id_usuario']; // es lo mismo que $idUsuario
 
-            // Elimina todo lo relacionado como en tu versión anterior...
-            $this->delete($idUsuario);
-            $this->db->commit();
-            return true;
-        } catch (Exception $e) {
-            $this->db->rollBack();
-            throw $e;
-        }
+        // Borra todos los servicios del proveedor
+        $this->exec("DELETE FROM servicio WHERE id_proveedor = ?", [$idProveedor]);
+        // Borra de tabla provee
+        $this->exec("DELETE FROM provee WHERE id_proveedor = ?", [$idProveedor]);
+        // Borra mensajes relacionados
+        $this->exec("DELETE FROM mensaje WHERE id_usuario = ? OR id_usuario_dest = ?", [$idUsuario, $idUsuario]);
+        // Borra notificaciones
+        $this->exec("DELETE FROM notificacion WHERE id_usuario = ?", [$idUsuario]);
+        // Borra el proveedor
+        $this->exec("DELETE FROM proveedor WHERE id_usuario = ?", [$idUsuario]);
     }
+    // Borra el usuario base
+    $this->exec("DELETE FROM usuario WHERE id_usuario = ?", [$idUsuario]);
+}
+
 
     // Actualizar descripción
     public function actualizarDescripcion($idUsuario, $descripcion) {
@@ -124,18 +129,25 @@ class Proveedor extends Model {
         return $this->query($sql, ["%$ubicacion%", $limit]);
     }
    public function obtenerPorId($idUsuario) {
-    $sql = "SELECT p.*, u.nombre, u.apellido, u.foto_perfil,
-                (SELECT AVG(r.calificacion) 
-                 FROM resena r 
-                 WHERE r.id_servicio IN 
-                     (SELECT id_servicio FROM servicio WHERE id_proveedor = p.id_usuario)
-                ) as calificacion_promedio
+    $sql = "SELECT p.*, u.nombre, u.apellido, u.email, u.telefono, u.foto_perfil
             FROM proveedor p
             INNER JOIN usuario u ON p.id_usuario = u.id_usuario
             WHERE p.id_usuario = ?";
     $res = $this->query($sql, [$idUsuario]);
     return $res[0] ?? null;
 }
+public function actualizarPromedio($idUsuario) {
+    $sql = "UPDATE proveedor 
+               SET calificacion_promedio = (
+                   SELECT AVG(calificacion)
+                   FROM servicio
+                   WHERE id_proveedor = ? AND calificacion IS NOT NULL
+               )
+             WHERE id_usuario = ?";
+    $this->exec($sql, [$idUsuario, $idUsuario]);
+}
+
+
 
 
 }

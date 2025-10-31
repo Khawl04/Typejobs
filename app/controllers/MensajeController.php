@@ -24,7 +24,7 @@ class MensajeController extends Controller {
 
     // Usa tu constante BASE_URL (ajusta si tienes otra variable global)
     $uploadsPath = BASE_URL . '/uploads/perfiles/';
-    $defaultAvatar = BASE_URL . '/img/defaultpfp.png';
+    $defaultAvatar = BASE_URL . '/assets/img/defaultpfp.png';
 
     // Busca si el seleccionado está entre las conversaciones existentes
     foreach ($conversaciones as &$conv) {

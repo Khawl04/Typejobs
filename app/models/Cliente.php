@@ -5,7 +5,7 @@ class Cliente extends Model {
 
     // Obtener perfil extendido (RF-02)
     public function perfilCompletoPorUsuario($idUsuario) {
-        $sql = "SELECT c.*, u.nomusuario, u.email, u.telefono,u.foto_perfil
+        $sql = "SELECT c.*, u.nomusuario, u.email, u.telefono,u.foto_perfil, u.nombre, u.apellido
                 FROM cliente c 
                 JOIN usuario u ON c.id_usuario = u.id_usuario
                 WHERE c.id_usuario = ?";
@@ -34,5 +34,27 @@ class Cliente extends Model {
     $stmt->close();
     return $ok;
 }
+public function eliminarCliente($idUsuario) {
+    $cliente = $this->findBy('id_usuario', $idUsuario);
+    if ($cliente) {
+        $idCliente = $cliente['id_cliente']; // Confirma en tu estructura que existe 
+
+        // Borra dependientes directos (ajusta/agrega si hay más tablas)
+        $this->exec("DELETE FROM pago WHERE id_cliente = ?", [$idCliente]);
+        $this->exec("DELETE FROM reserva WHERE id_cliente = ?", [$idCliente]);
+        $this->exec("DELETE FROM calificacion WHERE id_cliente = ?", [$idCliente]);
+        $this->exec("DELETE FROM resena WHERE id_cliente = ?", [$idCliente]);
+        // Agrega aquí los deletes de otras tablas que usen id_cliente o id_usuario según la relación real
+
+        // Borra el cliente
+        $this->exec("DELETE FROM cliente WHERE id_cliente = ?", [$idCliente]);
+    }
+    // Finalmente, borra el usuario
+    $this->exec("DELETE FROM usuario WHERE id_usuario = ?", [$idUsuario]);
+}
+
+
+
+
 }
 ?>

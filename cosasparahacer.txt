@@ -20,8 +20,4 @@ corregir la vista detalle y servicio para poner la calificacion
 
 hacer un modo oscuro para las vistas o al menos para los layout
 
-arreglar perfil proveedor
 
-arreglar algo de perfil cliente
-
-arreglar reserva cambiar

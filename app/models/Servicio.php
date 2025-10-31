@@ -18,15 +18,17 @@ class Servicio extends Model {
 
     // Trae todos los servicios activos para el catálogo con imagen principal
     public function obtenerTodos() {
-        $sql = "SELECT s.*, 
+    $sql = "SELECT s.*, 
             c.nombre_categoria as categoria, 
-            (SELECT imagen FROM imagen_servicio im WHERE im.id_servicio = s.id_servicio AND im.principal = 1 LIMIT 1) as imagen_principal
+            (SELECT imagen FROM imagen_servicio im WHERE im.id_servicio = s.id_servicio AND im.principal = 1 LIMIT 1) as imagen_principal,
+            (SELECT AVG(r.calificacion) FROM resena r WHERE r.id_servicio = s.id_servicio) as calificacion
             FROM {$this->table} s
             LEFT JOIN categoria c ON s.id_categoria = c.id_categoria
             WHERE s.estado = 'disponible'
             ORDER BY s.id_servicio DESC";
-        return $this->query($sql);
-    }
+    return $this->query($sql);
+}
+
 
     // Buscar servicios con filtros para el home/catalogo
     public function buscarServicios($filtros = []) {
@@ -110,9 +112,21 @@ class Servicio extends Model {
     return $this->exec($sql, [$url, $idServicio]);
 }
 public function borrar($idServicio) {
-    $sql = "DELETE FROM servicio WHERE id_servicio = ?";
-    return $this->exec($sql, [$idServicio]); // Usa exec como definimos antes
+    // 1. Obtén todas las reservas de este servicio
+    $reservas = $this->query("SELECT id_reserva FROM reserva WHERE id_servicio = ?", [$idServicio]);
+
+    // 2. Borra pagos de cada reserva asociada
+    foreach ($reservas as $res) {
+        $this->exec("DELETE FROM pago WHERE id_reserva = ?", [$res['id_reserva']]);
+    }
+
+    // 3. Borra reservas asociadas
+    $this->exec("DELETE FROM reserva WHERE id_servicio = ?", [$idServicio]);
+
+    // 4. Borra el servicio (finalmente)
+    $this->exec("DELETE FROM servicio WHERE id_servicio = ?", [$idServicio]);
 }
+
 public function obtenerPorId($idServicio) {
     $sql = "SELECT * FROM servicio WHERE id_servicio = ?";
     $result = $this->query($sql, [$idServicio]);
@@ -207,7 +221,14 @@ public function updateLikeCount($idResena, $delta) {
         $this->exec("UPDATE resena SET likes = GREATEST(likes - 1, 0) WHERE id_resena = ?", [$idResena]);
     }
 }
-
+public function actualizarPromedio($idServicio) {
+    $sql = "UPDATE servicio 
+               SET calificacion = (
+                   SELECT AVG(calificacion) FROM calificacion WHERE id_servicio = ?
+               )
+             WHERE id_servicio = ?";
+    $this->exec($sql, [$idServicio, $idServicio]);
+}
 
 
 

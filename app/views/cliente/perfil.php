@@ -112,7 +112,6 @@
 input[type="file"] {
     margin-bottom: 15px;
 }
-
 </style>
 
 <div class="perfil-main-container">
@@ -129,7 +128,7 @@ input[type="file"] {
         <div>
             <div class="perfil-nombre">
                 <?= htmlspecialchars($cliente['nombre'] ?? '') ?>
-                 <?= htmlspecialchars($cliente['apellido'] ?? '') ?>
+                <?= htmlspecialchars($cliente['apellido'] ?? '') ?>
             </div>
             <div class="perfil-rol">Cliente verificado</div>
         </div>
@@ -142,8 +141,7 @@ input[type="file"] {
     <div class="perfil-mensaje error"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>
     <?php endif; ?>
 
-    <form class="perfil-edit-form" method="POST" action="<?= BASE_URL ?>/cliente/perfil"
-        enctype="multipart/form-data">
+    <form class="perfil-edit-form" method="POST" action="<?= BASE_URL ?>/cliente/perfil" enctype="multipart/form-data">
         <label for="foto_perfil">Foto de perfil</label>
         <input type="file" name="foto_perfil" id="foto_perfil" accept="image/*">
 
@@ -152,12 +150,10 @@ input[type="file"] {
             value="<?= htmlspecialchars($cliente['nomusuario'] ?? '') ?>">
 
         <label for="telefono">Teléfono</label>
-        <input type="text" name="telefono" id="telefono"
-            value="<?= htmlspecialchars($cliente['telefono'] ?? '') ?>">
+        <input type="text" name="telefono" id="telefono" value="<?= htmlspecialchars($cliente['telefono'] ?? '') ?>">
 
         <label for="email">Email</label>
-        <input type="email" name="email" id="email"
-            value="<?= htmlspecialchars($cliente['email'] ?? '') ?>">
+        <input type="email" name="email" id="email" value="<?= htmlspecialchars($cliente['email'] ?? '') ?>">
 
         <label for="contrasena_actual">Contraseña actual</label>
         <input type="password" name="contrasena_actual" id="contrasena_actual" autocomplete="current-password"
@@ -167,8 +163,20 @@ input[type="file"] {
         <input type="password" name="nueva_contrasena" id="nueva_contrasena" autocomplete="new-password"
             placeholder="Nueva contraseña">
 
-        <button type="submit" class="btn-guardar-perfil">Guardar cambios</button>
+        <div style="display: flex; width: 100%; justify-content: space-between; align-items: center; margin-top: 22px;">
+            <!-- Botón guardar a la izquierda -->
+            <button type="submit" class="btn-guardar-perfil">Guardar cambios</button>
     </form>
+            <!-- Botón eliminar a la derecha -->
+            <form method="post" action="<?= BASE_URL ?>/cliente/eliminarCuenta"
+                onsubmit="return confirm('¿Seguro que deseas eliminar tu cuenta?');" style="margin: 0;">
+                <button type="submit" class="btn"
+                    style="background:#ef4444;color:#fff;border-radius:8px;padding:13px 24px;font-weight:700;">
+                    Eliminar cuenta
+                </button>
+            </form>
+    
+
 </div>
 
 

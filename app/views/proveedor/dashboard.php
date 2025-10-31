@@ -39,12 +39,6 @@
     margin-bottom: 2px;
 }
 
-.perfil-profesion {
-    color: #555;
-    font-size: 1.05rem;
-    margin-bottom: 12px;
-}
-
 .perfil-estrellas {
     color: #ffc107;
     font-size: 1.3em;
@@ -97,11 +91,6 @@
     background: #10b981;
 }
 
-.panel-botones .btn-mensajes {
-    background: #10b981;
-    color: #ffffffff;
-}
-
 .panel-botones .btn:hover {
     opacity: 0.87;
 }
@@ -139,70 +128,103 @@
     margin-bottom: 2px;
     color: #2563eb;
 }
-.mis-servicios-panel {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
-    margin: 2em auto;
-    max-width: 530px;
-    padding: 1.5em;
-    font-family: 'Segoe UI', Arial, sans-serif;
+
+/* SERVICIOS PANEL - profesional cards */
+.servicios-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 30px;
+    margin-top: 38px;
+    padding-bottom: 32px;
 }
-.mis-servicios-panel h2 {
-    font-size: 1.28em;
-    margin-bottom:10px;
-    color:#345675;
-    font-weight:600;
-}
-.servicios-list {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-.servicios-list li {
+
+.servicio-admin-card {
+    background: #232a37;
+    border-radius: 15px;
+    padding: 19px;
+    box-shadow: 0 4px 18px #05080a16;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    min-height: 320px;
     justify-content: space-between;
-    background: #f6f8fa;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    padding: 10px 16px;
-    transition: background 0.2s;
 }
-.servicios-list li:hover {
-    background: #eaf1fa;
+
+.servicio-admin-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 7px;
+    background: #d6e3ef;
+    margin-bottom: 13px;
 }
-.servicios-list span {
-    font-size: 1em;
-    color: #23293b;
-    font-weight: 500;
-}
-.btn-danger.btn-sm {
-    padding: 5px 14px;
-    font-size: 0.97em;
-    border-radius: 6px;
-    background: #ef4444;
+
+.servicio-admin-card .titulo {
+    font-size: 1.13em;
+    font-weight: bold;
     color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: box-shadow 0.1s, background 0.2s;
-    margin-left:12px;
+    margin-bottom: 7px;
+    letter-spacing: .011em;
 }
-.btn-danger.btn-sm:hover {
-    background: #b91c1c;
-    box-shadow: 0 2px 6px rgba(239,68,68,0.17);
+
+.servicio-admin-card .desc {
+    font-size: 0.99em;
+    color: #cee0f5;
+    margin-bottom: 9px;
+}
+
+.servicio-admin-card .precio {
+    font-weight: bold;
+    color: #9effc7;
+    margin-bottom: 8px;
+}
+
+.servicio-admin-card .acciones {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.servicio-admin-card .verdet {
+    padding: 7px 15px;
+    border-radius: 8px;
+    background: #61e3a6;
+    color: #202;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1em;
+    transition: background 0.14s;
+}
+
+.servicio-admin-card .verdet:hover {
+    background: #45bb8d;
+    color: #fff;
+}
+
+.servicio-admin-card .btn-borrar {
+    padding: 7px 16px;
+    border-radius: 8px;
+    background: #ef3d4b;
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.servicio-admin-card .btn-borrar:hover {
+    background: #ae2034;
 }
 </style>
 
 <?php
-$calificacion = floatval($proveedor['calificacion_promedio'] ?? 0); // e.g., 4.3
+$calificacion = floatval($proveedor['calificacion_promedio'] ?? 0);
 $estrellasMax = 5;
 $estrellasLlenas = floor($calificacion);
-$hayMedia = ($calificacion - $estrellasLlenas) >= 0.25; // muestra media si >0.25
+$hayMedia = ($calificacion - $estrellasLlenas) >= 0.25;
 ?>
 
 <div class="dashboard-proveedor">
-
     <!-- Card lateral perfil -->
     <div class="perfil-card">
         <?php if (!empty($proveedor['foto_perfil'])): ?>
@@ -257,7 +279,6 @@ $hayMedia = ($calificacion - $estrellasLlenas) >= 0.25; // muestra media si >0.2
             </div>
         </div>
 
-
         <!-- Panel de acciones/botones -->
         <div class="panel-botones">
             <a href="<?= BASE_URL ?>/proveedor/servicios" class="btn btn-success">+ Crear Servicio</a>
@@ -267,25 +288,32 @@ $hayMedia = ($calificacion - $estrellasLlenas) >= 0.25; // muestra media si >0.2
             <a href="<?= BASE_URL ?>/proveedor/perfil" class="btn btn-perfil">Perfil</a>
         </div>
 
-        <div class="mis-servicios-panel">
-    <h2>Mis servicios publicados</h2>
-    <?php if (!empty($serviciosPropios)): ?>
-    <ul class="servicios-list">
-        <?php foreach ($serviciosPropios as $serv): ?>
-        <li>
-            <span><?= htmlspecialchars($serv['titulo']) ?></span>
-            <form method="post" action="<?= BASE_URL ?>/proveedor" style="display:inline;"
-                onsubmit="return confirm('¿Seguro que deseas borrar este servicio?');">
-                <input type="hidden" name="id_servicio" value="<?= $serv['id_servicio'] ?>">
-                <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
-            </form>
-        </li>
-        <?php endforeach; ?>
-    </ul>
-    <?php else: ?>
-    <p style="color:#666;">No tienes servicios publicados todavía.</p>
-    <?php endif; ?>
-</div>
+        <h2 style="text-align:center;color:#61e3a6;font-size:2.0em;font-weight:800;margin:50px auto 25px;">Mis servicios
+            publicados</h2>
+        <div class="servicios-admin-grid">
+            <?php foreach ($serviciosPropios as $serv): ?>
+            <div class="servicio-admin-card">
+                <img src="<?= !empty($serv['imagen_principal']) ? (BASE_URL . '/' . htmlspecialchars($serv['imagen_principal'])) : (BASE_URL . '/img/noimg.png') ?>"
+                    alt="servicio">
+                <div class="titulo"><?= htmlspecialchars($serv['titulo']) ?></div>
+                <div class="desc"><?= htmlspecialchars($serv['descripcion']) ?></div>
+                <div class="precio">$<?= number_format($serv['precio'] ?? 0,0) ?></div>
+                <div class="acciones">
+                    <a href="<?= BASE_URL ?>/servicio/detalle?id=<?= $serv['id_servicio'] ?>" class="verdet">Ver
+                        detalles</a>
+                    <form method="post" action="<?= BASE_URL ?>/proveedor"
+                        onsubmit="return confirm('¿Seguro que deseas borrar este servicio?');"
+                        style="display:inline-block;">
+                        <input type="hidden" name="id_servicio" value="<?= $serv['id_servicio'] ?>">
+                        <button type="submit" class="btn-borrar">Borrar</button>
+                    </form>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <?php if (empty($serviciosPropios)): ?>
+        <p style="text-align:center;color:#bbb;font-size:1.1em;">No tienes servicios publicados todavía.</p>
+        <?php endif; ?>
     </div>
 </div>
 <?php require_once __DIR__ . '/../layouts/footer.php'; ?>
