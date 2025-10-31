@@ -4,7 +4,7 @@
 .perfil-main-container {
     max-width: 900px;
     margin: 42px auto 0;
-    background: #fff;
+    background: #232a37;
     border-radius: 20px;
     box-shadow: 0 2px 12px rgba(40, 40, 90, 0.11);
     padding: 42px 28px 32px 28px;
@@ -33,7 +33,7 @@
 .perfil-nombre {
     font-size: 1.7em;
     font-weight: 600;
-    color: #233;
+    color: #75e4a6;
 }
 
 .perfil-rol {
@@ -44,7 +44,7 @@
 
 .perfil-edit-form label {
     font-weight: 500;
-    color: #4e5e73;
+    color: #7688a8;
     margin-top: 17px;
 }
 

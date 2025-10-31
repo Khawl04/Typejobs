@@ -4,7 +4,7 @@
 .pagos-panel {
     max-width: 820px;
     margin: 28px auto 35px auto;
-    background: #fff;
+    background: #232a37;
     box-shadow: 0 2px 18px #e7ecf4;
     border-radius: 15px;
     padding: 28px 32px;
@@ -12,7 +12,7 @@
 .pagos-panel h1 {
     font-size: 2rem;
     font-weight: 700;
-    color: #24383c;
+    color: #75e4a6;
     margin-bottom: 18px;
 }
 .table {
@@ -33,6 +33,7 @@
     font-size: 1rem;
     border-bottom: 1px solid #edf2fa;
     text-align: left;
+    color: #75e4a6;
 }
 .table tbody tr:nth-child(even) {
     background: #f7fafc;

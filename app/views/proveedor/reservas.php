@@ -4,7 +4,7 @@
 .reservas-panel-admin {
     max-width: 900px;
     margin: 30px auto 35px auto;
-    background: #fff;
+    background: #232a37;
     box-shadow: 0 2px 18px #e7ecf4;
     border-radius: 15px;
     padding: 30px 32px;
@@ -13,7 +13,7 @@
 .reservas-panel-admin h1 {
     font-size: 2.05rem;
     font-weight: 700;
-    color: #293640;
+    color: #75e4a6;
     margin-bottom: 18px;
 }
 

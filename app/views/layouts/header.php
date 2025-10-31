@@ -24,11 +24,11 @@ error_log('SESSION HEADER (test): ' . print_r($_SESSION,true));
 
     /* ========== HEADER ========== */
     .navbar {
-        background: #e8e4d9;
+        background: #232a37;
         border-bottom: 1px solid #d0cbbe;
         padding: 15px 20px;
         position: sticky;
-        top: 0;
+        top: 0; 
         z-index: 1000;
     }
 
@@ -80,7 +80,7 @@ error_log('SESSION HEADER (test): ' . print_r($_SESSION,true));
     }
 
     .navbar a {
-        color: #5a5447;
+        color: #75e4a6;
         text-decoration: none;
         font-size: 16px;
         font-weight: 400;
@@ -262,8 +262,8 @@ error_log('SESSION HEADER (test): ' . print_r($_SESSION,true));
             </div>
             <nav class="nav-links">
                 <a href="<?= BASE_URL ?>/servicio" ...>Servicios</a>
-                <a href="<?= BASE_URL ?>/sobre" ...>Sobre</a>
-                <a href="<?= BASE_URL ?>/contacto" ...>Contacto</a>
+                <a href="<?= BASE_URL ?>/layouts/sobre" ...>Sobre</a>
+                <a href="<?= BASE_URL ?>/layouts/contacto" ...>Contacto</a>
                 <?php if (isset($_SESSION['id_usuario'])): ?>
                 <div class="user-dropdown" id="userDropdown">
                     <?php 

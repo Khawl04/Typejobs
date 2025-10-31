@@ -8,6 +8,11 @@ require_once __DIR__ . '/../core/Router.php';
 
 $router = new Router();
 
+//Rutas layouts
+$router->get('/layouts/sobre', 'DefaultController@sobre');
+$router->get('/layouts/contacto', 'DefaultController@contacto');
+$router->post('/layouts/contacto', 'DefaultController@contacto');
+
 // Ruta principal
 $router->get('/', function() {
     require_once __DIR__ . '/../app/views/index.php';
@@ -20,7 +25,7 @@ $router->get('/admin', function() {
 
 // Ruta soporte
 $router->get('/soporte', function() {
-    require_once __DIR__ . '/../app/views/soporte/index.php';
+    require_once __DIR__ . '/../app/views/soporte/soporte.php';
 });
 
 //Ruta perfil
@@ -39,12 +44,15 @@ $router->post('/cliente/eliminarCuenta', 'ClienteController@eliminarCuenta');
 
 // Ruta proveedor
 $router->get('/proveedor', 'ProveedorController@dashboard');
-$router->post('/proveedor', 'ProveedorController@borrarServicio');
+$router->get('/proveedor/editarservicio', 'ProveedorController@editarServicio');
+$router->post('/proveedor/editarservicio', 'ProveedorController@editarServicio');
+$router->post('/proveedor/borrarServicio', 'ProveedorController@borrarServicio');
 $router->get('/proveedor/servicios', 'ProveedorController@servicios');
 $router->get('/proveedor/perfil', 'ProveedorController@perfil');
 $router->post('/proveedor/perfil', 'ProveedorController@perfil');
 $router->get('/proveedor/reservas', 'ProveedorController@reservas');
 $router->post('/proveedor/eliminarCuenta', 'ProveedorController@eliminarCuenta');
+
 
 // Ruta servicio
 $router->get('/servicio', 'ServicioController@index'); 

@@ -10,7 +10,7 @@
 .perfil-card {
     min-width: 320px;
     max-width: 340px;
-    background: #f3f5fa;
+    background: #232a37;
     border-radius: 16px;
     box-shadow: 0 2px 8px rgba(40, 40, 60, 0.12);
     padding: 28px 24px;
@@ -37,6 +37,7 @@
     font-size: 1.33rem;
     font-weight: bold;
     margin-bottom: 2px;
+    color: #75e4a6
 }
 
 .perfil-estrellas {
@@ -51,13 +52,13 @@
 
 .perfil-seccion strong {
     display: block;
-    color: #222;
+    color: #75e4a6;
     font-weight: 500;
     margin-bottom: 2px;
 }
 
 .perfil-seccion {
-    color: #3a4367;
+    color: #ffffffff;
     font-size: 1rem;
 }
 
@@ -96,7 +97,7 @@
 }
 
 .panel-info {
-    background: #fff;
+    background: #232a37;
     border-radius: 12px;
     box-shadow: 0 1px 6px rgba(40, 40, 60, 0.08);
     margin-bottom: 12px;
@@ -118,7 +119,7 @@
 
 .panel-info-item-label {
     font-weight: 600;
-    color: #697297;
+    color: #75e4a6;
 }
 
 .panel-info-item-value {
@@ -250,7 +251,7 @@ $hayMedia = ($calificacion - $estrellasLlenas) >= 0.25;
             <?php for ($i = $estrellasLlenas + $hayMedia; $i < $estrellasMax; $i++): ?>
             <span style="color:#eee;font-size:1.2em;">★</span>
             <?php endfor; ?>
-            <span style="color:#555;font-size:0.86em;margin-left:6px;">
+            <span style="font-size:0.86em;margin-left:6px;">
                 <?= number_format($calificacion, 2) ?>/5
             </span>
         </div>
@@ -275,38 +276,54 @@ $hayMedia = ($calificacion - $estrellasLlenas) >= 0.25;
             </div>
             <div class="panel-info-item">
                 <div class="panel-info-item-label">Mensajes no leidos</div>
-                <div class="panel-info-item-value" style="color: #10b981;"><?= $mensajesNoLeidos ?? 0 ?></div>
+                <div class="panel-info-item-value" style="color: #5bd820ff;"><?= $mensajesNoLeidos ?? 0 ?></div>
             </div>
         </div>
 
         <!-- Panel de acciones/botones -->
         <div class="panel-botones">
             <a href="<?= BASE_URL ?>/proveedor/servicios" class="btn btn-success">+ Crear Servicio</a>
-            <a href="<?= BASE_URL ?>/servicio" class="btn">Ver Servicios</a>
+            <a href="<?= BASE_URL ?>/proveedor/editarservicio" class="btn">Editar Servicios</a>
             <a href="<?= BASE_URL ?>/proveedor/reservas" class="btn">Reservas</a>
             <a href="<?= BASE_URL ?>/mensaje" class="btn btn-mensajes">Mensajes</a>
             <a href="<?= BASE_URL ?>/proveedor/perfil" class="btn btn-perfil">Perfil</a>
         </div>
 
-        <h2 style="text-align:center;color:#61e3a6;font-size:2.0em;font-weight:800;margin:50px auto 25px;">Mis servicios
+        <h2 style="text-align:center;color:#30a36eff;font-size:2.0em;font-weight:800;margin:50px auto 25px;">Mis
+            servicios
             publicados</h2>
         <div class="servicios-admin-grid">
             <?php foreach ($serviciosPropios as $serv): ?>
             <div class="servicio-admin-card">
-                <img src="<?= !empty($serv['imagen_principal']) ? (BASE_URL . '/' . htmlspecialchars($serv['imagen_principal'])) : (BASE_URL . '/img/noimg.png') ?>"
+                <img src="<?= !empty($serv['imagen_servicio']) ? (BASE_URL . '/' . htmlspecialchars($serv['imagen_servicio'])) : (BASE_URL . '/img/noimg.png') ?>"
                     alt="servicio">
                 <div class="titulo"><?= htmlspecialchars($serv['titulo']) ?></div>
+                <div style="margin-bottom:7px;">
+                    <?php
+                $calif = floatval($serv['calificacion'] ?? 0);
+                $maxE = 5;
+                $eLlenas = floor($calif);
+                $hayMedia = ($calif - $eLlenas) >= 0.25;
+            ?>
+                    <?php for ($i = 0; $i < $eLlenas; $i++): ?>
+                    <span style="color:#ffc107;font-size:1.13em;">★</span>
+                    <?php endfor; ?>
+                    <?php if ($hayMedia): ?>
+                    <span style="color:#ffc107;font-size:1.13em;">☆</span>
+                    <?php endif; ?>
+                    <?php for ($i = $eLlenas + $hayMedia; $i < $maxE; $i++): ?>
+                    <span style="color:#eee;font-size:1.13em;">★</span>
+                    <?php endfor; ?>
+                    <span style="color: #b0b0b0; font-size: 0.97em; margin-left: 4px;">
+                        <?= number_format($calif, 2) ?>/5
+                    </span>
+                </div>
                 <div class="desc"><?= htmlspecialchars($serv['descripcion']) ?></div>
                 <div class="precio">$<?= number_format($serv['precio'] ?? 0,0) ?></div>
                 <div class="acciones">
-                    <a href="<?= BASE_URL ?>/servicio/detalle?id=<?= $serv['id_servicio'] ?>" class="verdet">Ver
-                        detalles</a>
-                    <form method="post" action="<?= BASE_URL ?>/proveedor"
-                        onsubmit="return confirm('¿Seguro que deseas borrar este servicio?');"
-                        style="display:inline-block;">
-                        <input type="hidden" name="id_servicio" value="<?= $serv['id_servicio'] ?>">
-                        <button type="submit" class="btn-borrar">Borrar</button>
-                    </form>
+                    <a href="<?= BASE_URL ?>/servicio/detalle?id=<?= $serv['id_servicio'] ?>" class="verdet">
+                        Ver detalles
+                    </a>
                 </div>
             </div>
             <?php endforeach; ?>

@@ -1,23 +1,23 @@
+agregar la ultima version del db
 
+arreglar calificacion (a medias)
 
-hacer la vista de panel de administrsador
+corregir la vista detalle y servicio para poner la calificacion (a medias)
 
-hacer la vista de soporte
+hacer la vista de panel de administrador (a medias)
+ 
+hacer chat de soporte (no)
 
-hacer chat de soporte (si no preguntas frecuentes)
+hacer el usuario soporte (no)
 
-hacer que la vista contacto y sobre funcionen
+hacer lo de mantenimiento (no)
 
-hacer lo de mantenimiento
+hacer lo de ticket de soporte con asistencia supongo (no)
 
-hacer lo de ticket de soporte con asistencia supongo
+hacer la notificacion (no)
 
-hacer la notificacion
+hacer un modo oscuro para las vistas o al menos para los layout (no)
 
-hacer lo del inicio inicio de sesion registro
+arreglar el filtrado de calificacion (no)
 
-corregir la vista detalle y servicio para poner la calificacion
-
-hacer un modo oscuro para las vistas o al menos para los layout
-
-
+hacer que se recupere la contraseña (no)

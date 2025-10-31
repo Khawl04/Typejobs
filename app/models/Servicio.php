@@ -80,12 +80,14 @@ class Servicio extends Model {
     }
 
     // Obtener servicios de un proveedor (array)
-    public function obtenerPorProveedor($idProveedor) {
-    $sql = "SELECT s.*, s.imagen_servicio as imagen_principal
+   public function obtenerPorProveedor($idProveedor) {
+    $sql = "SELECT s.*, c.nombre_categoria
             FROM servicio s
+            JOIN categoria c ON s.id_categoria = c.id_categoria
             WHERE s.id_proveedor = ?";
     return $this->query($sql, [$idProveedor]);
 }
+
 
 
     // Contar servicios de un proveedor
@@ -229,7 +231,21 @@ public function actualizarPromedio($idServicio) {
              WHERE id_servicio = ?";
     $this->exec($sql, [$idServicio, $idServicio]);
 }
-
+public function update($idServicio, $data) {
+        // Construye el SET dinámico a partir del array $data
+        $sets = [];
+        $values = [];
+        foreach ($data as $campo => $valor) {
+            $sets[] = "$campo = ?";
+            $values[] = $valor;
+        }
+        // Agrega el id al final del array de valores
+        $values[] = $idServicio;
+        // Genera el SQL final
+        $sql = "UPDATE servicio SET " . implode(', ', $sets) . " WHERE id_servicio = ?";
+        // Ejecuta la query (usa tu método exec/prepare)
+        return $this->exec($sql, $values);
+    }
 
 
 }

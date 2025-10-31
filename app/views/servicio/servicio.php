@@ -30,7 +30,7 @@
 .servicios-page {
     min-height: 80vh;
     padding: 40px 20px;
-    background-color: #f5f5f5;
+    background-color: #e8e4d9;
 }
 
 .page-header {
@@ -39,13 +39,13 @@
 }
 
 .page-header h1 {
-    color: #5a7355;
+    color: #232a37;
     font-size: 36px;
     margin-bottom: 10px;
 }
 
 .page-header p {
-    color: #666;
+    color: #232a37;
     font-size: 18px;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .servicio-card {
-    background: white;
+    background: #202331;;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -88,13 +88,13 @@
 .card-title {
     font-size: 20px;
     font-weight: 600;
-    color: #333;
+    color: #fff;
     margin-bottom: 10px;
 }
 
 .card-description {
     font-size: 14px;
-    color: #666;
+    color: #cee0f5;
     line-height: 1.6;
     margin-bottom: 15px;
     display: -webkit-box;
@@ -114,7 +114,7 @@
 .card-price {
     font-size: 18px;
     font-weight: 700;
-    color: #5a7355;
+    color: #9effc7;
 }
 
 .card-category {
@@ -130,8 +130,8 @@
     display: inline-block;
     margin-top: 10px;
     padding: 8px 16px;
-    background-color: #5a7355;
-    color: white;
+    background-color: #61e3a6;;
+    color: #202331;;
     text-decoration: none;
     border-radius: 6px;
     font-size: 14px;
@@ -198,7 +198,6 @@
     </div>
     <div class="card-body">
         <h3 class="card-title"><?= htmlspecialchars($serv['titulo']) ?></h3>
-        <!-- Aquí van las estrellas/calificación -->
         <div style="margin-bottom:6px;">
             <?php
             $calif = round($serv['calificacion'] ?? 0, 1);
@@ -206,12 +205,15 @@
                 echo '<span style="color:' . ($i <= $calif ? '#ffd458' : '#ddd') . ';font-size:1.4em;">★</span>';
             }
             ?>
-            <span style="color:#444;font-size:.90em"> <?= number_format($calif,2) ?>/5</span>
+            <span style="color:#b0b0b0;4;font-size:.90em"> <?= number_format($calif,2) ?>/5</span>
         </div>
         <p class="card-description"><?= htmlspecialchars($serv['descripcion']) ?></p>
         <div class="card-footer">
             <span class="card-price">$<?= number_format($serv['precio'], 0) ?></span>
             <span class="card-category"><?= htmlspecialchars($serv['categoria']) ?></span>
+            <span class="card-duracion" style="background:#d8fae9;color:#217d55; border-radius: 13px; padding:4px 14px 3px 12px; font-size:.95em; margin-left:7px;">
+                <?= htmlspecialchars($serv['duracion_estimada'] ?? '-') ?> min
+            </span>
         </div>
         <a href="<?= BASE_URL ?>/servicio/detalle?id=<?= $serv['id_servicio'] ?>" class="btn-ver-mas">Ver detalles</a>
     </div>

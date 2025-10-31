@@ -74,17 +74,19 @@ class Proveedor extends Model {
     }
 
     // Actualizar calificación promedio y total
-    public function actualizarCalificacion($idUsuario) {
-        $sql = "SELECT AVG(puntuacion) as promedio, COUNT(*) as total
-                FROM calificacion
-                WHERE id_usuario = ?";
-        $result = $this->query($sql, [$idUsuario]);
-        $stats = $result[0] ?? ['promedio' => 0, 'total' => 0];
-        return $this->update($idUsuario, [
-            'calificacion_promedio' => round($stats['promedio'],2),
-            'total_calificaciones' => $stats['total']
-        ]);
-    }
+    public function actualizarCalificacion($idProveedor) {
+    $sql = "SELECT AVG(calificacion) as promedio, COUNT(*) as total
+            FROM servicio
+            WHERE id_proveedor = ? AND calificacion IS NOT NULL";
+    $result = $this->query($sql, [$idProveedor]);
+    $stats = $result[0] ?? ['promedio' => 0, 'total' => 0];
+    return $this->update($idProveedor, [
+        'calificacion_promedio' => round($stats['promedio'],2),
+        'total_calificaciones' => $stats['total']
+    ]);
+}
+
+
 
     // Marcar proveedor como verificado
     public function verificar($idUsuario) {
@@ -137,18 +139,15 @@ class Proveedor extends Model {
     return $res[0] ?? null;
 }
 public function actualizarPromedio($idUsuario) {
-    $sql = "UPDATE proveedor 
+    $sql = "UPDATE proveedor
                SET calificacion_promedio = (
-                   SELECT AVG(calificacion)
-                   FROM servicio
-                   WHERE id_proveedor = ? AND calificacion IS NOT NULL
+                    SELECT AVG(calificacion)
+                    FROM servicio
+                    WHERE id_proveedor = ? AND calificacion IS NOT NULL
                )
-             WHERE id_usuario = ?";
+            WHERE id_usuario = ?";
     $this->exec($sql, [$idUsuario, $idUsuario]);
 }
-
-
-
 
 }
 ?>

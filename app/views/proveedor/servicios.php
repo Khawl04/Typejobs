@@ -16,7 +16,7 @@ body {
 .form-actions {
     text-align: right;
     bottom: 0;
-    background: white;
+    background: #232a37;
     padding-bottom: 10px;
     z-index: 2;
 }
@@ -29,7 +29,7 @@ body {
 
 
 .service-card {
-    background: white;
+    background: #232a37;
     border-radius: 12px;
     padding: 25px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -65,7 +65,7 @@ body {
     display: block;
     font-size: 14px;
     font-weight: 600;
-    color: #333;
+    color: #75e4a6 ;
     margin-bottom: 8px;
 }
 
@@ -123,7 +123,7 @@ body {
     display: block;
     font-size: 14px;
     font-weight: 600;
-    color: #333;
+    color: #75e4a6;
     margin-bottom: 8px;
 }
 
@@ -156,7 +156,7 @@ body {
 
 .currency-label {
     font-size: 14px;
-    color: #666;
+    color: #75e4a6;
 }
 
 
@@ -249,7 +249,7 @@ body {
             </div>
             <div class="form-group">
                 <label for="duracion_estimada">Duración estimada (minutos)</label>
-                <input type="number" name="duracion_estimada" min="1" max="300" placeholder="Ej: 60" required>
+                <input type="number" name="duracion_estimada" min="1" placeholder="Ej: 60" required>
             </div>
             <div class="form-actions">
                 <button class="publish-btn" type="submit">Publicar servicio</button>

@@ -25,10 +25,10 @@ class Mensaje extends Model
 
     // Marcar como leídos los mensajes de remitente para destinatario
     public function marcarLeidos($idRemitente, $idDestinatario) {
-        $sql = "UPDATE mensaje SET leido = 1 
-                WHERE id_usuario = ? AND id_usuario_dest = ? AND leido = 0";
-        return $this->query($sql, [$idRemitente, $idDestinatario]);
-    }
+    $sql = "UPDATE mensaje SET leido = 1 
+            WHERE id_usuario = ? AND id_usuario_dest = ? AND leido = 0";
+    $this->exec($sql, [$idRemitente, $idDestinatario]);
+}
 
     // Obtener mensajes de una conversación entre dos usuarios
     public function obtenerMensajes($idUsuario, $idDestinatario) {
@@ -52,6 +52,7 @@ class Mensaje extends Model
         // 'archivo_adjunto' => $archivoAdjunto // Solo si realmente existe este campo
     ]);
 }
+
 
 }
 ?>

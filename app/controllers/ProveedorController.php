@@ -1,4 +1,5 @@
 <?php
+
 class ProveedorController extends Controller {
 
     private $proveedorModel;
@@ -68,8 +69,9 @@ public function borrarServicio() {
         $this->servicioModel->borrar($id);
         $_SESSION['success'] = "Servicio borrado correctamente.";
     }
-    $this->redirect('/proveedor');
+    $this->redirect('/proveedor/editarservicio');
 }
+
 public function perfil() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $proveedor = $this->proveedorModel->obtenerConUsuario($_SESSION['id_usuario']);
@@ -129,5 +131,57 @@ public function perfil() {
         'proveedor' => $proveedor
     ]);
 }
+// Solo para editar (update)
+public function editarServicio() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        // Validar todos los campos necesarios antes de armar $data:
+        if (
+            !isset(
+                $_POST['titulo'],
+                $_POST['descripcion'],
+                $_POST['precio'],
+                $_POST['id_categoria'],
+                $_POST['duracion_estimada']
+            )
+        ) {
+            $_SESSION['error'] = 'Faltan campos en el formulario de edición.';
+            $this->redirect('/proveedor/editarservicio');
+            return;
+        }
+
+        $id = intval($_POST['id_servicio']);
+        $data = [
+            'titulo' => $_POST['titulo'],
+            'descripcion' => $_POST['descripcion'],
+            'precio' => $_POST['precio'],
+            'id_categoria' => $_POST['id_categoria'],
+            'duracion_estimada' => $_POST['duracion_estimada'],
+        ];
+
+        // Para la imagen:
+        if (!empty($_FILES['imagen_servicio']['name'])) {
+            $nombreArchivo = 'servicio_' . $id . '_' . time() . '.jpg';
+            $rutaDestino = __DIR__ . '/../../public/uploads/servicios/' . $nombreArchivo;
+            if (move_uploaded_file($_FILES['imagen_servicio']['tmp_name'], $rutaDestino)) {
+                $data['imagen_servicio'] = 'uploads/servicios/' . $nombreArchivo;
+            }
+        }
+
+        $this->servicioModel->update($id, $data);
+        $_SESSION['success'] = 'Servicio actualizado correctamente.';
+        $this->redirect('/proveedor/editarservicio');
+        return;
+    }
+    // SOLO mostrar la vista en GET:
+    $proveedor = $this->proveedorModel->obtenerPorUsuario($_SESSION['id_usuario']);
+    $serviciosPropios = $this->servicioModel->obtenerPorProveedor($proveedor['id_usuario']);
+    $categoriaModel = $this->model('Categoria');
+    $categorias = $categoriaModel->obtenerActivas();
+    require_once __DIR__ . '/../views/proveedor/editarservicio.php';
+}
+
+
+
 }
 ?>

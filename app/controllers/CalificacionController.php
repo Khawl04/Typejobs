@@ -11,27 +11,27 @@ class CalificacionController extends Controller {
 
     // Crear o actualizar calificación y reseña de un servicio
     public function crear() {
-        // Asume método POST y que tienes los siguientes datos
-        $idServicio = (int)$_POST['id_servicio'];
-        $idCliente = $_SESSION['user_id'];
-        $calificacion = (int)$_POST['calificacion'];
-        $comentario = trim($_POST['comentario'] ?? '');
+    $idServicio = (int)$_POST['id_servicio'];
+    $idCliente = $_SESSION['user_id'];
+    $calificacion = (int)$_POST['calificacion'];
+    $comentario = trim($_POST['comentario'] ?? '');
 
-        // 1. Guardar la calificación y reseña
-        $this->calificacionModel->crearConResena($idServicio, $idCliente, $calificacion, $comentario);
+    // Guarda la reseña/calificación (en tu tabla de calificaciones/resenas)
+    $this->calificacionModel->crearConResena($idServicio, $idCliente, $calificacion, $comentario);
 
-        // 2. Actualizar el promedio de estrellas en el servicio
-        $this->servicioModel->actualizarPromedio($idServicio);
+    // ¡AQUÍ VA LA LÍNEA CLAVE QUE ACTUALIZA EL SERVICIO!
+    $this->servicioModel->update($idServicio, ['calificacion' => $calificacion]);
 
-        // 3. Actualizar el promedio en proveedor
-        $servicio = $this->servicioModel->obtenerPorId($idServicio);
-        $idProveedor = $servicio['id_proveedor'] ?? null;
-        if ($idProveedor) {
-            $this->proveedorModel->actualizarPromedio($idProveedor);
-        }
-
-        // Redirigir a la vista detalle
-        $this->redirect('/servicio/detalle?id=' . $idServicio);
+    // Recalcula promedio del proveedor si quieres mantenerlo actualizado
+    $servicio = $this->servicioModel->obtenerPorId($idServicio);
+    $idProveedor = $servicio['id_proveedor'] ?? null;
+    if ($idProveedor) {
+        $this->proveedorModel->actualizarPromedio($idProveedor);
     }
+
+    $this->redirect('/servicio/detalle?id=' . $idServicio);
+}
+
+
 }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2025 a las 15:45:53
+-- Tiempo de generación: 31-10-2025 a las 12:10:22
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -105,7 +105,8 @@ CREATE TABLE `categoria` (
 
 INSERT INTO `categoria` (`id_categoria`, `nombre_categoria`, `descripcion`, `fecha_creacion`) VALUES
 (1, 'Prueba', 'Categoría de prueba para testear servicios', '2025-10-29 00:35:31'),
-(2, 'asasdd', '', '2025-10-29 04:46:59');
+(2, 'asasdd', '', '2025-10-29 04:46:59'),
+(3, 'Bananin', '', '2025-10-30 22:52:21');
 
 -- --------------------------------------------------------
 
@@ -123,7 +124,14 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id_usuario`, `fecha_ultimo_acceso`) VALUES
-(16, '2025-10-27 05:29:42');
+(16, '2025-10-27 05:29:42'),
+(20, '2025-10-30 20:58:29'),
+(23, '2025-10-30 21:28:23'),
+(24, '2025-10-30 21:30:29'),
+(25, '2025-10-30 21:34:18'),
+(26, '2025-10-30 21:37:34'),
+(27, '2025-10-30 21:44:37'),
+(28, '2025-10-30 21:46:27');
 
 -- --------------------------------------------------------
 
@@ -191,8 +199,51 @@ CREATE TABLE `mensaje` (
   `id_usuario` int(11) NOT NULL,
   `id_usuario_dest` int(11) NOT NULL,
   `contenido` text NOT NULL,
-  `leido` tinyint(1) DEFAULT 0
+  `leido` tinyint(1) DEFAULT 0,
+  `archivo_adjunto` varchar(255) DEFAULT NULL,
+  `fecha_envio` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `mensaje`
+--
+
+INSERT INTO `mensaje` (`id_mensaje`, `id_usuario`, `id_usuario_dest`, `contenido`, `leido`, `archivo_adjunto`, `fecha_envio`) VALUES
+(1, 16, 18, 'dsa', 1, NULL, '2025-10-30 15:16:51'),
+(2, 16, 18, 'dsa', 1, NULL, '2025-10-30 15:16:51'),
+(3, 16, 18, 'dsa', 1, NULL, '2025-10-30 15:16:51'),
+(4, 16, 18, 'dsa', 1, NULL, '2025-10-30 15:16:51'),
+(5, 16, 18, 'sa', 1, NULL, '2025-10-30 15:16:51'),
+(6, 18, 16, 'sass', 0, NULL, '2025-10-30 15:16:51'),
+(7, 16, 18, 'asasd', 1, NULL, '2025-10-30 15:16:51'),
+(8, 16, 18, 'sa', 1, NULL, '2025-10-30 15:16:51'),
+(9, 16, 18, 'cdsd', 1, NULL, '2025-10-30 15:16:51'),
+(10, 16, 18, 'cdsd', 1, NULL, '2025-10-30 15:16:51'),
+(11, 16, 18, 'dssa', 1, NULL, '2025-10-30 15:16:51'),
+(12, 16, 18, 'as', 1, NULL, '2025-10-30 15:16:51'),
+(13, 16, 18, 'saa', 1, NULL, '2025-10-30 15:16:51'),
+(14, 16, 18, 'gg', 1, NULL, '2025-10-30 15:57:22'),
+(15, 16, 18, 'fff', 1, NULL, '2025-10-30 15:58:31'),
+(16, 16, 18, 'assdadas', 1, NULL, '2025-10-30 16:16:20'),
+(17, 18, 16, 'saddsa', 0, NULL, '2025-10-30 16:18:10'),
+(18, 16, 18, 'f', 1, NULL, '2025-10-30 17:11:23'),
+(19, 16, 18, 'hola', 1, NULL, '2025-10-30 17:16:23'),
+(20, 16, 18, 'si', 1, NULL, '2025-10-30 17:16:52'),
+(21, 16, 18, '', 1, NULL, '2025-10-30 17:28:23'),
+(22, 16, 18, '', 1, NULL, '2025-10-30 17:30:26'),
+(23, 16, 18, '', 1, 'uploads/mensaje/6903cbf1119ca_08a3dd841025e3d2b73121cd8d0af545.jpg', '2025-10-30 17:34:57'),
+(24, 16, 18, '', 1, 'uploads/mensaje/6903cd2613217_caratula.pdf', '2025-10-30 17:40:06'),
+(25, 16, 18, '', 1, 'uploads/mensaje/6903cd3d65490_16865854344306.jpg', '2025-10-30 17:40:29'),
+(26, 16, 18, '', 1, 'uploads/mensaje/6903cd4ba391d_requerimientosfuncionales.docx', '2025-10-30 17:40:43'),
+(27, 16, 18, '', 1, 'uploads/mensaje/6903ce4864c0b_Literatura escrito.doc', '2025-10-30 17:44:56'),
+(28, 16, 18, '', 1, 'uploads/mensaje/6903ce9743d93_holas.txt', '2025-10-30 17:46:15'),
+(29, 18, 16, '', 0, 'uploads/mensaje/6903ceb5d7c6a_holas.txt', '2025-10-30 17:46:45'),
+(30, 18, 16, '', 0, 'uploads/mensajes/6903cf2c96ee2_holas.txt', '2025-10-30 17:48:44'),
+(31, 18, 16, '', 0, 'uploads/mensajes/6903cf7b742aa_holas.txt', '2025-10-30 17:50:03'),
+(32, 20, 18, 'sasdasd', 1, NULL, '2025-10-30 18:07:00'),
+(33, 16, 18, 'sadasd', 1, NULL, '2025-10-31 00:05:48'),
+(34, 16, 18, '', 1, 'uploads/mensajes/690427921b975_dancing-banana.gif', '2025-10-31 00:05:54'),
+(35, 16, 18, '', 1, 'uploads/mensajes/69042797a9f8c_requerimientosfuncionales.docx', '2025-10-31 00:05:59');
 
 -- --------------------------------------------------------
 
@@ -205,8 +256,49 @@ CREATE TABLE `notificacion` (
   `id_usuario` int(11) DEFAULT NULL,
   `titulo` varchar(100) NOT NULL,
   `mensaje` text NOT NULL,
-  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tipo` varchar(50) DEFAULT NULL,
+  `contenido` text DEFAULT NULL,
+  `url_accion` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `notificacion`
+--
+
+INSERT INTO `notificacion` (`id_notificacion`, `id_usuario`, `titulo`, `mensaje`, `fecha_creacion`, `tipo`, `contenido`, `url_accion`) VALUES
+(1, 18, 'Nuevo mensaje recibido', '', '2025-10-30 17:24:08', NULL, 'Tienes un nuevo mensaje de Juan', '/mensaje/mensaje?chat=16'),
+(2, 18, 'Nuevo mensaje recibido', '', '2025-10-30 17:24:12', NULL, 'Tienes un nuevo mensaje de Juan', '/mensaje/mensaje?chat=16'),
+(3, 16, 'Nuevo mensaje recibido', '', '2025-10-30 17:24:59', NULL, 'Tienes un nuevo mensaje de Luan', '/mensaje/mensaje?chat=18'),
+(4, 18, 'Nuevo mensaje recibido', '', '2025-10-30 17:41:20', NULL, 'Tienes un nuevo mensaje de Juan', '/mensaje/mensaje?chat=16'),
+(5, 18, 'Nuevo mensaje recibido', '', '2025-10-30 17:41:31', NULL, 'Tienes un nuevo mensaje de Juan', '/mensaje/mensaje?chat=16'),
+(6, 18, 'Nuevo mensaje recibido', '', '2025-10-30 17:41:45', NULL, 'Tienes un nuevo mensaje de Juan', '/mensaje/mensaje?chat=16'),
+(7, 18, 'Nuevo mensaje recibido', '', '2025-10-30 17:41:56', NULL, 'Tienes un nuevo mensaje de Juan', '/mensaje/mensaje?chat=16'),
+(8, 18, 'Nuevo mensaje recibido', '', '2025-10-30 18:06:24', NULL, NULL, '/mensaje/mensaje?chat=16'),
+(9, 18, 'Nuevo mensaje recibido', '', '2025-10-30 18:11:31', NULL, NULL, '/mensaje/mensaje?chat=16'),
+(10, 18, 'Nuevo mensaje recibido', '', '2025-10-30 18:13:26', NULL, NULL, '/mensaje/mensaje?chat=16'),
+(11, 18, 'Nuevo mensaje recibido', '', '2025-10-30 18:57:22', NULL, NULL, '/mensaje/mensaje?chat=16'),
+(12, 18, 'Nuevo mensaje recibido', '', '2025-10-30 18:58:31', NULL, NULL, '/mensaje/mensaje?chat=16'),
+(13, 18, 'Nuevo mensaje recibido', '', '2025-10-30 19:16:20', NULL, NULL, '/mensaje?chat=16'),
+(14, 16, 'Nuevo mensaje recibido', '', '2025-10-30 19:18:10', NULL, NULL, '/mensaje?chat=18'),
+(15, 18, 'Nuevo mensaje recibido', '', '2025-10-30 20:11:23', NULL, NULL, '/mensaje?chat=16'),
+(16, 18, 'Nuevo mensaje recibido', '', '2025-10-30 20:16:23', NULL, NULL, '/mensaje?chat=16'),
+(17, 18, 'Nuevo mensaje recibido', '', '2025-10-30 20:16:52', NULL, NULL, '/mensaje?chat=16'),
+(18, 18, 'Nuevo mensaje recibido', '', '2025-10-30 20:28:23', NULL, NULL, '/mensaje?chat=16'),
+(19, 18, 'Nuevo mensaje recibido', '', '2025-10-30 20:30:26', NULL, NULL, '/mensaje?chat=16'),
+(20, 18, 'Nuevo mensaje recibido', '', '2025-10-30 20:34:57', NULL, NULL, '/mensaje?chat=16'),
+(21, 18, 'Nuevo mensaje recibido', '', '2025-10-30 20:40:06', NULL, NULL, '/mensaje?chat=16'),
+(22, 18, 'Nuevo mensaje recibido', '', '2025-10-30 20:40:29', NULL, NULL, '/mensaje?chat=16'),
+(23, 18, 'Nuevo mensaje recibido', '', '2025-10-30 20:40:43', NULL, NULL, '/mensaje?chat=16'),
+(24, 18, 'Nuevo mensaje recibido', '', '2025-10-30 20:44:56', NULL, NULL, '/mensaje?chat=16'),
+(25, 18, 'Nuevo mensaje recibido', '', '2025-10-30 20:46:15', NULL, NULL, '/mensaje?chat=16'),
+(26, 16, 'Nuevo mensaje recibido', '', '2025-10-30 20:46:45', NULL, NULL, '/mensaje?chat=18'),
+(27, 16, 'Nuevo mensaje recibido', '', '2025-10-30 20:48:44', NULL, NULL, '/mensaje?chat=18'),
+(28, 16, 'Nuevo mensaje recibido', '', '2025-10-30 20:50:03', NULL, NULL, '/mensaje?chat=18'),
+(29, 18, 'Nuevo mensaje recibido', '', '2025-10-30 21:07:00', NULL, NULL, '/mensaje?chat=20'),
+(30, 18, 'Nuevo mensaje recibido', '', '2025-10-31 03:05:48', NULL, NULL, '/mensaje?chat=16'),
+(31, 18, 'Nuevo mensaje recibido', '', '2025-10-31 03:05:54', NULL, NULL, '/mensaje?chat=16'),
+(32, 18, 'Nuevo mensaje recibido', '', '2025-10-31 03:05:59', NULL, NULL, '/mensaje?chat=16');
 
 -- --------------------------------------------------------
 
@@ -251,36 +343,6 @@ CREATE TABLE `pago` (
   `estado` enum('pendiente','completado','reembolsado') DEFAULT 'pendiente',
   `transaccion_id` varchar(190) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `pago`
---
-
-INSERT INTO `pago` (`id_pago`, `id_reserva`, `id_cliente`, `monto`, `metodo_pago`, `fecha_pago`, `estado`, `transaccion_id`) VALUES
-(1, 1, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(2, 2, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(3, 3, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(4, 4, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(5, 5, NULL, 21.00, 'efectivo', '2025-10-30 02:20:26', 'completado', 'TXN-1761801626-6039'),
-(6, 6, NULL, 21.00, 'tarjeta', '2025-10-30 02:45:40', 'completado', 'TXN-1761803140-8588'),
-(7, 7, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(8, 8, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(9, 9, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(10, 10, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(11, 11, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(12, 12, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(13, 13, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(14, 14, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(15, 15, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(16, 16, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(17, 17, NULL, 21.00, 'tarjeta', '2025-10-30 05:01:51', 'completado', 'TXN-1761811311-9943'),
-(18, 18, NULL, 21.00, 'efectivo', '2025-10-30 05:03:09', 'completado', 'TXN-1761811389-4456'),
-(19, 19, NULL, 21.00, 'efectivo', '2025-10-30 05:03:36', 'completado', 'TXN-1761811416-6399'),
-(20, 20, NULL, 21.00, '', NULL, 'pendiente', NULL),
-(21, 21, NULL, 16.00, 'tarjeta', '2025-10-30 05:51:18', 'completado', 'TXN-1761814278-4232'),
-(22, 22, 16, 21.00, 'tarjeta', '2025-10-30 05:55:32', 'completado', 'TXN-1761814532-1794'),
-(24, 23, 16, 21.00, '', NULL, 'pendiente', NULL),
-(25, 24, 16, 21.00, '', NULL, 'pendiente', NULL);
 
 -- --------------------------------------------------------
 
@@ -329,7 +391,8 @@ CREATE TABLE `proveedor` (
 
 INSERT INTO `proveedor` (`id_usuario`, `calificacion_promedio`, `servicios_activos`, `fecha_verificacion`, `descripcion`, `direccion`) VALUES
 (18, 3.50, 1, NULL, 'sdaasas', 'vssd'),
-(19, 5.00, 2, NULL, NULL, NULL);
+(19, 5.00, 2, NULL, NULL, NULL),
+(21, 0.00, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -369,15 +432,9 @@ CREATE TABLE `resena` (
   `id_cliente` int(11) NOT NULL,
   `calificacion` decimal(3,2) NOT NULL,
   `texto` varchar(450) NOT NULL,
-  `fecha` datetime NOT NULL DEFAULT current_timestamp()
+  `fecha` datetime NOT NULL DEFAULT current_timestamp(),
+  `likes` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `resena`
---
-
-INSERT INTO `resena` (`id_resena`, `id_servicio`, `id_cliente`, `calificacion`, `texto`, `fecha`) VALUES
-(2, 24, 16, 5.00, 'Excelente trabajo, muy profesional...', '2025-10-29 01:57:03');
 
 -- --------------------------------------------------------
 
@@ -399,36 +456,6 @@ CREATE TABLE `reserva` (
   `notas` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `reserva`
---
-
-INSERT INTO `reserva` (`id_reserva`, `id_cliente`, `id_servicio`, `id_notificacion`, `fecha_reserva`, `hora_inicio`, `hora_fin`, `fecha_creacion`, `observaciones`, `estado`, `notas`) VALUES
-(1, 16, 24, NULL, '2025-10-29 00:00:00', '21:35:00', '21:38:00', '2025-10-30 00:36:12', NULL, 'pendiente', 'saas'),
-(2, 16, 24, NULL, '2025-10-30 00:00:00', '01:03:00', '01:05:00', '2025-10-30 04:00:33', NULL, 'pendiente', 'fdfdfd'),
-(3, 16, 24, NULL, '2025-10-30 00:00:00', '03:21:00', '05:21:00', '2025-10-30 04:21:20', NULL, 'pendiente', 'jj'),
-(4, 16, 24, NULL, '2025-10-30 00:00:00', '03:39:00', '05:39:00', '2025-10-30 04:39:32', NULL, 'pendiente', 'ffgfg'),
-(5, 16, 24, NULL, '2025-10-30 00:00:00', '06:20:00', '02:20:00', '2025-10-30 05:15:09', NULL, 'confirmada', 'dasdsda'),
-(6, 16, 24, NULL, '2025-10-30 00:00:00', '06:29:00', '06:28:00', '2025-10-30 05:25:00', NULL, 'confirmada', 'w'),
-(7, 16, 24, NULL, '2025-10-30 00:00:00', '02:50:00', '02:53:00', '2025-10-30 05:47:27', NULL, 'pendiente', 'asass'),
-(8, 16, 24, NULL, '2025-10-30 00:00:00', '07:16:00', '07:16:00', '2025-10-30 06:12:45', NULL, 'pendiente', 'ssd'),
-(9, 16, 24, NULL, '2025-10-30 00:00:00', '03:34:00', '03:39:00', '2025-10-30 06:30:04', NULL, 'pendiente', 'ghghf'),
-(10, 16, 24, NULL, '2025-10-30 00:00:00', '08:30:00', '03:35:00', '2025-10-30 06:30:41', NULL, 'pendiente', 'frf'),
-(11, 16, 24, NULL, '2025-10-30 00:00:00', '09:23:00', '08:23:00', '2025-10-30 07:23:39', NULL, 'pendiente', 'vbvb'),
-(12, 16, 24, NULL, '2025-10-30 00:00:00', '07:28:00', '04:33:00', '2025-10-30 07:28:52', NULL, 'pendiente', 'sasadads'),
-(13, 16, 24, NULL, '2025-10-30 00:00:00', '04:46:00', '04:45:00', '2025-10-30 07:41:54', NULL, 'pendiente', 'dsffdsfds'),
-(14, 16, 24, NULL, '2025-10-30 00:00:00', '08:43:00', '21:43:00', '2025-10-30 07:43:56', NULL, 'pendiente', 'sddd'),
-(15, 16, 24, NULL, '2025-10-30 00:00:00', '04:53:00', '09:47:00', '2025-10-30 07:47:19', NULL, 'pendiente', 'ddsa'),
-(16, 16, 24, NULL, '2025-10-30 00:00:00', '09:48:00', '04:54:00', '2025-10-30 07:48:49', NULL, 'pendiente', 'adsas'),
-(17, 16, 24, NULL, '2025-10-16 00:00:00', '04:01:00', '10:01:00', '2025-10-30 07:57:06', NULL, 'confirmada', 'fvff'),
-(18, 16, 24, NULL, '2025-10-30 00:00:00', '10:02:00', '05:06:00', '2025-10-30 08:02:03', NULL, 'confirmada', 'ssadsad'),
-(19, 16, 24, NULL, '2025-10-30 00:00:00', '08:03:00', '09:03:00', '2025-10-30 08:03:26', NULL, 'pendiente', 'dwwd'),
-(20, 16, 24, NULL, '2025-11-01 00:00:00', '08:28:00', '10:28:00', '2025-10-30 08:29:00', NULL, 'pendiente', 'gfgf'),
-(21, 16, 24, NULL, '2025-10-30 00:00:00', '05:55:00', '09:54:00', '2025-10-30 08:51:01', NULL, 'confirmada', 'gbfgf'),
-(22, 16, 24, NULL, '2025-10-30 00:00:00', '05:00:00', '05:59:00', '2025-10-30 08:55:06', NULL, 'confirmada', 'fvf'),
-(23, 16, 24, NULL, '2025-10-30 00:00:00', '09:04:00', '05:04:00', '2025-10-30 08:59:54', NULL, 'pendiente', 'ssadasd'),
-(24, 16, 24, NULL, '2025-10-30 00:00:00', '06:10:00', '11:05:00', '2025-10-30 09:05:08', NULL, 'pendiente', 'fdfd');
-
 -- --------------------------------------------------------
 
 --
@@ -445,17 +472,19 @@ CREATE TABLE `servicio` (
   `estado` varchar(20) DEFAULT 'disponible',
   `precio` decimal(10,2) NOT NULL DEFAULT 0.00,
   `duracion_estimada` int(11) DEFAULT NULL,
-  `imagen_servicio` varchar(255) DEFAULT NULL
+  `imagen_servicio` varchar(255) DEFAULT NULL,
+  `calificacion` decimal(3,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `servicio`
 --
 
-INSERT INTO `servicio` (`id_servicio`, `id_proveedor`, `id_categoria`, `titulo`, `descripcion`, `ubicacion`, `estado`, `precio`, `duracion_estimada`, `imagen_servicio`) VALUES
-(21, 18, 1, 'fdsfsd', 'sffsd', NULL, 'disponible', 21.00, 23, 'uploads/servicios/servicio_21_1761709029.jpg'),
-(23, 18, 1, 'asasdsd', 'ads', NULL, 'disponible', 123.00, 211, 'uploads/servicios/servicio_23_1761711299.jpg'),
-(24, 18, 2, 'asas', 'asdas', NULL, 'disponible', 21.00, 12, 'uploads/servicios/servicio_24_1761713219.jpg');
+INSERT INTO `servicio` (`id_servicio`, `id_proveedor`, `id_categoria`, `titulo`, `descripcion`, `ubicacion`, `estado`, `precio`, `duracion_estimada`, `imagen_servicio`, `calificacion`) VALUES
+(25, 18, 3, 'Banana dance', 'soy una banana', NULL, 'disponible', 214.00, 65, 'uploads/servicios/servicio_25_1761864741.gif', NULL),
+(31, 18, 2, 'ddsa', 'assad', NULL, 'disponible', 2327.00, 226, 'uploads/servicios/servicio_31_1761905466.jpg', NULL),
+(33, 18, 3, 'assww', 'asasdee', NULL, 'disponible', 2112.00, 213, 'uploads/servicios/servicio_33_1761907198.jpg', NULL),
+(34, 18, 1, 'fsfdfds', 'fsdsdf', NULL, 'disponible', 332.00, 212, 'uploads/servicios/servicio_34_1761907445.gif', NULL);
 
 -- --------------------------------------------------------
 
@@ -505,7 +534,15 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id_usuario`, `email`, `contrasena`, `nombre`, `apellido`, `nomusuario`, `telefono`, `fecha_registro`, `estado`, `tipo_usuario`, `foto_perfil`) VALUES
 (16, 'juano5@gmail.com', '$2y$10$Tsv7lwEROA8hVgdYFBQMX.UfcM07MkGx2HZxWylZOEYT9zHLRclb2', 'Juan', 'Alvarez', 'Juano8', '2234', '2025-10-27 05:29:42', 'activo', 'cliente', 'perfil_16_1761767428.jpg'),
 (18, 'Luano2@gmail.com', '$2y$10$e.w6y0kPA3leSsnuSexdaO/W/kb/lV4YiegjZwigUbpJVern33RU2', 'Luan', 'Gomez', 'Luano2', '2322', '2025-10-27 23:42:16', 'activo', 'proveedor', 'perfil_18_1761768206.jpg'),
-(19, 'maria@example.com', 'contraseñaEncriptada', 'Maria', 'Perez', 'mariap', NULL, '2025-10-27 23:43:42', 'activo', 'proveedor', NULL);
+(19, 'maria@example.com', 'contraseñaEncriptada', 'Maria', 'Perez', 'mariap', NULL, '2025-10-27 23:43:42', 'activo', 'proveedor', NULL),
+(20, 'guzito@gmail.com', '$2y$10$cKTtdaP6sDFS9cjDNZYE.uyG77OF9SUKhxNh1nZ47DllbkGOknPci', 'Guzman', 'Viudez', 'Guzi2', '', '2025-10-30 20:58:29', 'activo', 'cliente', NULL),
+(21, 'juano@gmail.com', '$2y$10$KNYzYbrpGEQs0tj/yiTXqO0D7yx6uvzmNtAcD0sL0Uf5qb8XQN6Z.', 'dassad', 'asasd', 'Juano', '', '2025-10-30 21:22:45', 'activo', 'proveedor', NULL),
+(23, 'Nahu2@gmail.com', '$2y$10$JbqZZ/jDZBpprEEhCzpFOukX27bd2vcQJRTFkhGBZ3uPKcqiv2.L.', 'Nahuel', 'Fernandez', 'Ferna2', '', '2025-10-30 21:28:23', 'activo', 'cliente', NULL),
+(24, 'das@gmail.com', '$2y$10$Rh54t91iah2e1cA0vBf/z.rIUQvmS4x1kbK//SRgLXe0YVkpEfgca', 'dasda', 'aas', 'dasa', '', '2025-10-30 21:30:29', 'activo', 'cliente', NULL),
+(25, 'Juansito10@gmail.com', '$2y$10$OH1Dn4ryo8UU.7xKsTALG.nElyXpJVAGn.szXdEwPe25JuLKWR15m', 'dassada', 'adsasd', 'ssaas', '', '2025-10-30 21:34:18', 'activo', 'cliente', NULL),
+(26, 'Juansito12@gmail.com', '$2y$10$Io8FbLmqChC5UQsPtT/NEOj/VKX6g.qZLdGD1eWwQwDwPuwRE/PBS', 'dassad', 'Gomez', 'Juano11', '', '2025-10-30 21:37:34', 'activo', 'cliente', NULL),
+(27, 'Juansito24@gmail.com', '$2y$10$lDPIdDaUi8Q3arH10f57lO94vc7hpJ/h1TbT/367Z3RNmhz3Z5rUC', 'dassad', 'Gomez', 'Juano20', '', '2025-10-30 21:44:37', 'activo', 'cliente', NULL),
+(28, 'Juansito643@gmail.com', '$2y$10$xWN4rPHYB/IS.JYq804Une0fbx/PLErh2Ipf1gVbukZOmG1qryqqm', 'aadsasd', 'asdasd', 'Juano92', '', '2025-10-30 21:46:27', 'activo', 'cliente', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -721,7 +758,7 @@ ALTER TABLE `calificacion`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `imagen_servicio`
@@ -739,37 +776,37 @@ ALTER TABLE `mantenimiento`
 -- AUTO_INCREMENT de la tabla `mensaje`
 --
 ALTER TABLE `mensaje`
-  MODIFY `id_mensaje` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mensaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
-  MODIFY `id_notificacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_notificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `pago`
 --
 ALTER TABLE `pago`
-  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `resena`
 --
 ALTER TABLE `resena`
-  MODIFY `id_resena` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_resena` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `servicio`
 --
 ALTER TABLE `servicio`
-  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `superadmin`
@@ -781,7 +818,7 @@ ALTER TABLE `superadmin`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Restricciones para tablas volcadas

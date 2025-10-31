@@ -36,7 +36,7 @@ $reservas = $reservaModel->obtenerPorCliente($_SESSION['id_usuario']);
 .reservas-panel {
     max-width: 880px;
     margin: 25px auto 35px auto;
-    background: #fff;
+    background: #232a37;
     box-shadow: 0 2px 18px #e7ecf4;
     border-radius: 15px;
     padding: 28px 32px;
@@ -45,7 +45,7 @@ $reservas = $reservaModel->obtenerPorCliente($_SESSION['id_usuario']);
 .reservas-panel h1 {
     font-size: 2.1rem;
     font-weight: 700;
-    color: #24383c;
+    color: #75e4a6;
     margin-bottom: 18px;
 }
 
@@ -67,6 +67,7 @@ $reservas = $reservaModel->obtenerPorCliente($_SESSION['id_usuario']);
     padding: 11px 8px;
     font-size: 1rem;
     border-bottom: 1px solid #edf2fa;
+    color: #75e4a6;
 }
 
 .table tbody tr:nth-child(even) {

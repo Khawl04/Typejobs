@@ -141,6 +141,7 @@
     justify-content: center;
     max-width:1180px;
     margin:0 auto 0;
+    padding-bottom: 90px;
 }
 .perfil-servicio-card {
     background:#202331;
@@ -200,6 +201,10 @@
     </div>
     <!-- Datos personales a la derecha -->
     <div class="perfil-datos">
+        <div style="text-align:center;">
+    <span style="color:#66ffaf; font-size:1.4em; font-weight:700; letter-spacing:.04em;">Datos del proveedor:</span>
+</div>
+
         <div>
             <span>Email:</span>
             <br><span><?= htmlspecialchars($proveedor['email'] ?? 'No especificado') ?></span>
@@ -227,6 +232,26 @@
             <img src="<?= !empty($s['imagen_principal']) ? (BASE_URL . '/' . htmlspecialchars($s['imagen_principal'])) : (BASE_URL . '/img/noimg.png') ?>" alt="servicio"/>
             <div>
                 <div class="titulo"><?= htmlspecialchars($s['titulo']) ?></div>
+                <div style="margin-bottom:6px;">
+                    <?php
+                        $calif = floatval($s['calificacion'] ?? 0);
+                        $maxE = 5;
+                        $eLlenas = floor($calif);
+                        $hayMedia = ($calif - $eLlenas) >= 0.25;
+                    ?>
+                    <?php for ($i = 0; $i < $eLlenas; $i++): ?>
+                        <span style="color:#ffc107;font-size:1.15em;">★</span>
+                    <?php endfor; ?>
+                    <?php if ($hayMedia): ?>
+                        <span style="color:#ffc107;font-size:1.15em;">☆</span>
+                    <?php endif; ?>
+                    <?php for ($i = $eLlenas + $hayMedia; $i < $maxE; $i++): ?>
+                        <span style="color:#ccc;font-size:1.15em;">★</span>
+                    <?php endfor; ?>
+                    <span style="color:#b0b0b0;font-size:0.97em;margin-left:4px;">
+                        <?= number_format($calif,2) ?>/5
+                    </span>
+                </div>
                 <div class="desc"><?= htmlspecialchars($s['descripcion']) ?></div>
             </div>
             <div style="margin-top:6px;display:flex;justify-content:space-between;align-items:flex-end;">
@@ -237,5 +262,6 @@
     <?php endforeach; ?>
     </div>
 <?php endif; ?>
+
 
 <?php require_once __DIR__ . '/../layouts/footer.php'; ?>

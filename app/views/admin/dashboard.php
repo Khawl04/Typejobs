@@ -1,8 +1,3 @@
-<?php
-// ==========================================
-// app/views/admin/dashboard.php
-// ==========================================
-?>
 <?php require_once __DIR__ . '/../layouts/header.php'; ?>
 
 <div class="container mt-3">
@@ -86,7 +81,7 @@
             </tbody>
         </table>
     </div>
-    <?php endif; ?>
+    <?php endif; ?>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 </div>
 
 <?php require_once __DIR__ . '/../layouts/footer.php'; ?>
