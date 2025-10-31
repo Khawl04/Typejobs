@@ -91,10 +91,6 @@
         Tras un trabajo terminado, ingresa al detalle del servicio y deja tu calificación y reseña.
     </div>
     <div class="faq-item">
-        <span class="faq-q">¿Olvidaste tu contraseña?</span><br>
-        Usa <a href="<?= BASE_URL ?>/recuperar">recuperar clave</a> para restablecerla rápidamente.
-    </div>
-    <div class="faq-item">
         <span class="faq-q">¿Cómo edito mi perfil o servicios?</span><br>
         En tu menú usuario, elige "Perfil" o "Mis servicios" y modifica lo necesario.
     </div>
