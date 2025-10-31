@@ -37,19 +37,22 @@ class Cliente extends Model {
 public function eliminarCliente($idUsuario) {
     $cliente = $this->findBy('id_usuario', $idUsuario);
     if ($cliente) {
-        $idCliente = $cliente['id_cliente']; // Confirma en tu estructura que existe 
+        $idCliente = $cliente['id_usuario'];
+
+        // Borra mensajes enviados y recibidos por el usuario antes de borrar usuario
+        $this->exec("DELETE FROM mensaje WHERE id_usuario = ? OR id_usuario_dest = ?", [$idCliente, $idCliente]);
 
         // Borra dependientes directos (ajusta/agrega si hay más tablas)
         $this->exec("DELETE FROM pago WHERE id_cliente = ?", [$idCliente]);
         $this->exec("DELETE FROM reserva WHERE id_cliente = ?", [$idCliente]);
         $this->exec("DELETE FROM calificacion WHERE id_cliente = ?", [$idCliente]);
         $this->exec("DELETE FROM resena WHERE id_cliente = ?", [$idCliente]);
-        // Agrega aquí los deletes de otras tablas que usen id_cliente o id_usuario según la relación real
+        // Cambia a id_usuario si así se llaman en esas tablas
 
-        // Borra el cliente
-        $this->exec("DELETE FROM cliente WHERE id_cliente = ?", [$idCliente]);
+        // BORRA PRIMERO el registro de cliente (para respetar FK cliente_ibfk_1)
+        $this->exec("DELETE FROM cliente WHERE id_usuario = ?", [$idCliente]);
     }
-    // Finalmente, borra el usuario
+    // Y por último, borra el usuario
     $this->exec("DELETE FROM usuario WHERE id_usuario = ?", [$idUsuario]);
 }
 
