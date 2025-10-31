@@ -1,5 +1,3 @@
-agregar la ultima version del db
-
 arreglar calificacion (a medias)
 
 corregir la vista detalle y servicio para poner la calificacion (a medias)
