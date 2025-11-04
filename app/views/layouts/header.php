@@ -147,7 +147,7 @@ error_log('SESSION HEADER (test): ' . print_r($_SESSION,true));
         color: #228869;
         padding: 8px 22px 8px 13px;
         /* más espacio */
-        background: #f0f7f3;
+        background: #000000ff;
         border-radius: 32px;
         min-width: 120px;
         transition: background 0.2s;
@@ -156,7 +156,7 @@ error_log('SESSION HEADER (test): ' . print_r($_SESSION,true));
 
     .user-nombre:hover,
     .user-dropdown:hover .user-nombre {
-        background: #e6f3ec;
+        background: #3d3d3dff;
     }
 
     .user-menu {

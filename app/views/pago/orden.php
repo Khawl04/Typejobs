@@ -152,7 +152,7 @@ if ($fecha && $hora) {
             <a href="<?= BASE_URL ?>/servicio" class="primary">Ir al inicio</a>
             <a href="#" onclick="window.print(); return false;" class="secondary">Imprimir</a>
             <?php if (isset($reserva['id_proveedor'])): ?>
-            <a href="<?= BASE_URL ?>/mensaje.php?id=<?= $reserva['id_proveedor'] ?>" class="secondary">Contactar
+            <a href="<?= BASE_URL ?>/mensaje?chat=<?= $reserva['id_proveedor'] ?>" class="secondary">Contactar
                 proveedor</a>
             <?php endif; ?>
 

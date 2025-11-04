@@ -274,8 +274,94 @@ require_once __DIR__ . '/../layouts/header.php'; ?>
             <h2>Descripción</h2>
             <?= htmlspecialchars($servicio['descripcion']) ?>
         </div>
-        <!-- Reseñas igual que antes -->
-        <!-- ... (todo el demás bloque de reseñas/form estrellas igual que antes) ... -->
+       <div class="resenas-section" id="resenas-section">
+            <h2>Reseñas de Clientes</h2>
+            <div style="max-height:320px;overflow-y:auto;padding-right:6px;">
+                <?php 
+    if(!empty($resenas)) {
+        usort($resenas, function($a, $b) {
+            return ($b['likes'] ?? 0) <=> ($a['likes'] ?? 0) ?: ($b['calificacion'] ?? 0) <=> ($a['calificacion'] ?? 0) ?: strtotime($b['fecha']) <=> strtotime($a['fecha']);
+        });
+        foreach ($resenas as $r) { ?>
+                <div class="resena-card">
+                    <div class="resena-avatar">
+                        <img src="<?= empty($r['foto_perfil']) 
+                        ? (BASE_URL . '/img/defaultpfp.png') 
+                        : (BASE_URL . '/uploads/perfiles/' . htmlspecialchars($r['foto_perfil'])) ?>" alt="avatar" />
+                    </div>
+                    <div class="resena-info">
+                        <div class="resena-nombre">
+                            <?= htmlspecialchars($r['nombre_cliente']) ?>
+                            <?= isset($r['apellido_cliente']) ? htmlspecialchars($r['apellido_cliente']) : '' ?>
+                        </div>
+                        <div class="resena-estrellas">
+                            <?php for ($i=1; $i<=5; $i++): ?>
+                            <span style="cursor:pointer;font-size:1.15em;color:#ffd458;">
+                                <?= $i <= (int)$r['calificacion'] ? '★' : '☆' ?>
+                            </span>
+                            <?php endfor; ?>
+                        </div>
+                        <div><?= htmlspecialchars($r['texto']) ?></div>
+                        <form method="post" action="<?= BASE_URL ?>/servicio/likeResena"
+                            style="margin-top:7px;display:inline;">
+                            <input type="hidden" name="id_resena" value="<?= $r['id_resena'] ?>">
+                            <button type="submit" style="background:none;border:none;cursor:pointer;color:#d4ffdc">
+                                👍 <?= $r['likes'] ?? 0 ?>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="resena-fecha"><?= date("d/m/Y", strtotime($r['fecha'])) ?></div>
+                </div>
+                <?php }} ?>
+            </div>
+        </div>
+        <?php if ($puedeReseniar): ?>
+        <!-- Formulario mejorar estrellas -->
+        <div class="crear-resena-section" style="margin:24px 0 0;">
+            <form method="post" class="crear-resena-box"
+                action="<?= BASE_URL ?>/servicio/detalle?id=<?= $servicio['id_servicio'] ?>">
+                <input type="hidden" name="id_servicio" value="<?= $servicio['id_servicio'] ?>">
+                <div style="margin-bottom:13px;">
+                    <label style="font-weight:600;">Tu puntaje:</label>
+                    <span id="estrellas-seleccion" style="display:inline-block;margin-left:7px;">
+                        <?php for($i=1;$i<=5;$i++): ?>
+                        <input type="radio" name="calificacion" value="<?=$i?>" id="estrella<?=$i?>"
+                            style="display:none;">
+                        <label for="estrella<?=$i?>" style="font-size:1.7em;cursor:pointer;color:#bbb;">★</label>
+                        <?php endfor; ?>
+                    </span>
+                </div>
+                <div style="margin-bottom:9px;">
+                    <label>Comentario:</label>
+                    <textarea required name="texto" rows="3"
+                        style="width:100%;border-radius:7px;padding:8px;"></textarea>
+                </div>
+                <button type="submit" class="detalle-btn-comprar" style="margin:0;">Enviar reseña</button>
+            </form>
+            <script>
+            // Pintado de estrellas seleccionable
+            document.querySelectorAll('.crear-resena-box input[type="radio"]').forEach(function(radio, i, arr) {
+                radio.addEventListener('change', function() {
+                    for (let j = 1; j <= 5; j++) {
+                        document.querySelector('label[for="estrella' + j + '"]').style.color = (j <=
+                            this.value) ? "#ffd458" : "#bbb";
+                    }
+                });
+            });
+            // Para seleccionar arrastrando mouse también
+            document.querySelectorAll('.crear-resena-box label').forEach(label => {
+                label.onclick = function() {
+                    var val = parseInt(this.htmlFor.replace('estrella', ''));
+                    for (let i = 1; i <= 5; i++) {
+                        document.querySelector('label[for="estrella' + i + '"]').style.color = (i <= val) ?
+                            "#ffd458" : "#bbb";
+                    }
+                    document.getElementById(this.htmlFor).checked = true;
+                }
+            });
+            </script>
+        </div>
+        <?php endif; ?>
     </div>
 
     <!-- Col info y compra -->

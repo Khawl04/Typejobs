@@ -229,7 +229,7 @@
     <div class="perfil-servicios-grid">
     <?php foreach($servicios as $s): ?>
         <div class="perfil-servicio-card">
-            <img src="<?= !empty($s['imagen_principal']) ? (BASE_URL . '/' . htmlspecialchars($s['imagen_principal'])) : (BASE_URL . '/img/noimg.png') ?>" alt="servicio"/>
+            <img src="<?= !empty($s['imagen_servicio']) ? (BASE_URL . '/' . htmlspecialchars($s['imagen_servicio'])) : (BASE_URL . '/img/defaultpfp.png') ?>" alt="servicio"/>
             <div>
                 <div class="titulo"><?= htmlspecialchars($s['titulo']) ?></div>
                 <div style="margin-bottom:6px;">
