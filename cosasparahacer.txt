@@ -21,3 +21,5 @@ hacer que se recupere la contraseña (no)
 hacer un modo cliente-proveedoor (no)
 
 proveedor confirme los pagos pendiente (no)
+
+hacer otro perfil pero para cliente (no)
