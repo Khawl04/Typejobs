@@ -1,0 +1,23 @@
+arreglar calificacion (a medias)
+
+corregir la vista detalle y servicio para poner la calificacion (a medias)
+
+hacer chat de soporte (no)
+
+hacer el usuario soporte (no)
+
+hacer lo de mantenimiento (no)
+
+hacer lo de ticket de soporte con asistencia (no)
+
+hacer la notificacion (no)
+
+hacer un modo oscuro para las vistas o al menos para los layout (no)
+
+arreglar el filtrado de calificacion (no)
+
+hacer que se recupere la contraseña (no)
+
+hacer un modo cliente-proveedoor (no)
+
+proveedor confirme los pagos pendiente (no)
