@@ -1,18 +1,20 @@
 <?php require_once __DIR__ . '/../layouts/header.php'; ?>
 
 <style>
-
 body {
-background: #274c3d;
+    background: #274c3d;
 }
+
 .servicios-grid-ed {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
     gap: 28px;
     margin-bottom: 36px;
     max-width: 1150px;
-    margin-left: auto; margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 .serv-card-ed {
     background: #202331;
     border-radius: 13px;
@@ -21,22 +23,27 @@ background: #274c3d;
     transition: border 0.15s, transform .14s;
     position: relative;
     border: 2.2px solid transparent;
-    display: flex; flex-direction: column;
+    display: flex;
+    flex-direction: column;
     min-height: 328px;
 }
+
 .serv-card-ed.selected,
 .serv-card-ed:hover {
     border-color: #43d5bf;
     transform: translateY(-4px) scale(1.016);
     box-shadow: 0 7px 30px #62f8e830;
 }
+
 .serv-card-ed img {
-    width: 100%; height: 200px;
+    width: 100%;
+    height: 200px;
     object-fit: cover;
     background: #e4eee4;
     border-radius: 0 0 8px 8px;
     margin-bottom: 0px;
 }
+
 .serv-card-ed .titulo {
     font-size: 1.09em;
     font-weight: 700;
@@ -45,18 +52,31 @@ background: #274c3d;
     margin-top: 14px;
     padding: 0 16px;
 }
+
 .serv-card-ed .desc {
-    font-size: .99em; color: #cee0f5; 
-    margin-bottom: 11px; padding: 0 16px;
+    font-size: .99em;
+    color: #cee0f5;
+    margin-bottom: 11px;
+    padding: 0 16px;
     min-height: 32px;
     opacity: 0.92;
     line-height: 1.44;
 }
+
 .info-row {
-    display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom:7px; padding: 0 16px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 7px;
+    padding: 0 16px;
 }
-.serv-info-tag, .cat-chip {
-    display: inline-flex; align-items: center; gap: 6px;
+
+.serv-info-tag,
+.cat-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     border-radius: 17px;
     padding: 2.5px 11px;
     font-size: .99em;
@@ -65,30 +85,53 @@ background: #274c3d;
     margin-right: 0;
     margin-bottom: 2px;
 }
+
 .cat-chip {
     background: #efe2b9;
     color: #aa990e;
     font-weight: 600;
     border: 1.1px solid #f5e6b8;
 }
+
 .precio {
     color: #9effc7;
     font-weight: 800;
     font-size: 1.23em;
     margin-bottom: 2px;
     padding: 0 16px;
-    display: flex; align-items: center; gap:6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
+
 .rating {
-    margin-left: 16px; margin-bottom: 5px;
+    margin-left: 16px;
+    margin-bottom: 5px;
 }
-.rating .star {font-size: 1.15em; color: #ffd458;}
-.rating .star.gray {color: #899094;}
-.rating .calif-score {font-size:.96em;color:#b4bbbb;margin-left:8px;}
+
+.rating .star {
+    font-size: 1.15em;
+    color: #ffd458;
+}
+
+.rating .star.gray {
+    color: #899094;
+}
+
+.rating .calif-score {
+    font-size: .96em;
+    color: #b4bbbb;
+    margin-left: 8px;
+}
+
 .acciones {
-    position: absolute; top: 14px; right: 14px;
-    display: flex; gap: 7px;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: flex;
+    gap: 7px;
 }
+
 .titulo-sec {
     text-align: center;
     font-size: 2.4em;
@@ -99,19 +142,35 @@ background: #274c3d;
     margin-bottom: 32px;
     padding-bottom: 13px;
 }
+
 .btn-del {
-    background: #f55380; color: #fff; border:none;
-    border-radius: 7px; font-weight:700;
-    padding:6px 11px; font-size: 1.49em; line-height: 1; cursor:pointer;
+    background: #f55380;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    font-weight: 700;
+    padding: 6px 11px;
+    font-size: 1.49em;
+    line-height: 1;
+    cursor: pointer;
     box-shadow: 0 0.5px 3px #f8b0c9c2;
     transition: background .13s;
 }
 
-.btn-del:hover { background:#b81836;}
-@media (max-width: 768px){
-    .servicios-grid-ed{grid-template-columns:1fr;}
-    .serv-card-ed img {height:130px;}
+.btn-del:hover {
+    background: #b81836;
 }
+
+@media (max-width: 768px) {
+    .servicios-grid-ed {
+        grid-template-columns: 1fr;
+    }
+
+    .serv-card-ed img {
+        height: 130px;
+    }
+}
+
 .editar-form-panel {
     max-width: 530px;
     margin: 0 auto 16px auto;
@@ -120,31 +179,57 @@ background: #274c3d;
     padding: 35px 28px 26px 28px;
     box-shadow: 0 1.9px 14px #2bfca622;
 }
-.editar-form-panel label {font-weight:600; color:#81ebad;}
-.editar-form-panel input, .editar-form-panel textarea, .editar-form-panel select {
-    width:100%; border-radius:7px; background:#f2f7f7;
-    border:1.1px solid #b2d4c3; padding:12px; font-size:1.09em;
+
+.editar-form-panel label {
+    font-weight: 600;
+    color: #81ebad;
+}
+
+.editar-form-panel input,
+.editar-form-panel textarea,
+.editar-form-panel select {
+    width: 100%;
+    border-radius: 7px;
+    background: #f2f7f7;
+    border: 1.1px solid #b2d4c3;
+    padding: 12px;
+    font-size: 1.09em;
     margin-bottom: 14px;
 }
-.editar-form-panel textarea {min-height:72px;resize:vertical;}
-.editar-form-panel .editar-btn {
-    background:linear-gradient(92deg,#43d5bf 38%,#0c8171 95%);
-    color:#fff; border:none; border-radius:7px;
-    padding:13px 0;font-size:1.13em;font-weight:800;
-    width:100%; margin-top:5px; cursor:pointer;transition:.17s background;
+
+.editar-form-panel textarea {
+    min-height: 72px;
+    resize: vertical;
 }
-.editar-form-panel .editar-btn:hover {background:#19807d;}
+
+.editar-form-panel .editar-btn {
+    background: #0c8171;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 13px 0;
+    font-size: 1.13em;
+    font-weight: 800;
+    width: 100%;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: .17s background;
+}
+
+.editar-form-panel .editar-btn:hover {
+    background: #19807d;
+}
 </style>
 
 <div class="editarServicios-wrap">
     <div class="titulo-sec">Tus servicios</div>
     <div class="servicios-grid-ed" id="servicios-ed-list">
         <?php foreach($serviciosPropios as $serv): ?>
-        <div class="serv-card-ed"
-             data-id="<?= htmlspecialchars((string)($serv['id_servicio'] ?? '')) ?>"
-             data-categoria="<?= htmlspecialchars((string)($serv['id_categoria'] ?? '')) ?>"
-             data-duracion="<?= htmlspecialchars((string)($serv['duracion_estimada'] ?? '')) ?>">
-            <img src="<?= !empty($serv['imagen_servicio']) ? (BASE_URL . '/' . htmlspecialchars((string)$serv['imagen_servicio'])) : (BASE_URL . '/img/defaultpfp.png') ?>" alt="servicio">
+        <div class="serv-card-ed" data-id="<?= htmlspecialchars((string)($serv['id_servicio'] ?? '')) ?>"
+            data-categoria="<?= htmlspecialchars((string)($serv['id_categoria'] ?? '')) ?>"
+            data-duracion="<?= htmlspecialchars((string)($serv['duracion_estimada'] ?? '')) ?>">
+            <img src="<?= !empty($serv['imagen_servicio']) ? (BASE_URL . '/' . htmlspecialchars((string)$serv['imagen_servicio'])) : (BASE_URL . '/img/defaultpfp.png') ?>"
+                alt="servicio">
             <div class="titulo"><?= htmlspecialchars((string)($serv['titulo'] ?? '')) ?></div>
             <div class="rating">
                 <?php
@@ -171,7 +256,8 @@ background: #274c3d;
             <div class="acciones">
                 <form method="post" action="<?= BASE_URL ?>/proveedor/borrarServicio"
                     onsubmit="return confirm('¿Seguro que deseas eliminar este servicio?');" style="display:inline;">
-                    <input type="hidden" name="id_servicio" value="<?= htmlspecialchars((string)($serv['id_servicio'] ?? '')) ?>">
+                    <input type="hidden" name="id_servicio"
+                        value="<?= htmlspecialchars((string)($serv['id_servicio'] ?? '')) ?>">
                     <button type="submit" class="btn-del" title="Eliminar servicio">
                         &times;
                     </button>
@@ -229,12 +315,15 @@ cards.forEach(card => {
         idserv.value = card.dataset.id ?? "";
         titulo.value = card.querySelector('.titulo')?.textContent.trim() ?? "";
         descripcion.value = card.querySelector('.desc')?.textContent.trim() ?? "";
-        precio.value = card.querySelector('.precio')?.textContent.replace(/[^0-9]/g,'') ?? "";
+        precio.value = card.querySelector('.precio')?.textContent.replace(/[^0-9]/g, '') ?? "";
         categoria.value = card.dataset.categoria ?? "";
         duracion.value = card.dataset.duracion ?? "";
         imgPreview.src = card.querySelector('img')?.src ?? "";
         form.style.display = "block";
-        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        form.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
     });
 });
 </script>
