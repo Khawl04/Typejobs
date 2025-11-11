@@ -2,7 +2,7 @@
 
 <style>
 body {
-    background: #f5f7fa;
+    background: #274c3d;
 }
 
 .soporte-wrap {
