@@ -97,7 +97,6 @@ class ServicioController extends Controller {
         ]);
     }
 
-    // Ver detalle individual de un servicio
     public function show($id) {
         $servicio = $this->servicioModel->obtenerConProveedor($id);
         $imagenModel = $this->model('ImagenServicio');
