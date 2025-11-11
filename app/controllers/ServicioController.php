@@ -40,7 +40,8 @@ class ServicioController extends Controller {
         $nuevaCategoria = trim($_POST['nueva_categoria'] ?? '');
 
         if ($idCategoriaForm === 'nueva' && $nuevaCategoria !== '') {
-            $idCategoria = $categoriaModel->crear($nuevaCategoria);
+            $idCategoria = $categoriaModel->crear(['nombre' => $nuevaCategoria]);
+
         } else {
             $idCategoria = (int)$idCategoriaForm;
         }
