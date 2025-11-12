@@ -1,12 +1,7 @@
 <?php
-require_once __DIR__ . '/../../core/database.php';
-
-class Usuario {
-    private $db;
-
-    public function __construct() {
-        $this->db = Database::getInstance()->getConnection();
-    }
+class Usuario extends Model {
+    protected $table = 'usuario';
+    protected $primaryKey = 'id_usuario';
 
     // Verifica si el email ya existe en la tabla usuario
     public function emailExists($email) {
